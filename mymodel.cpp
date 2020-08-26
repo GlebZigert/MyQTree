@@ -51,6 +51,7 @@ delete rootItem;
 
 QVariant MyModel::data(const QModelIndex &index, int role) const
 {
+//    qDebug()<<"MyModel::data";
     if (!index.isValid())
     {
    //     qDebug()<<"!index.isValid()";
@@ -67,10 +68,12 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
     switch(index.column())
     {
         case 0:
+  //      qDebug()<<item->name;
         return item->name;
         break;
 
         case 1:
+  //       qDebug()<<item->type;
         return item->type;
         break;
 
@@ -79,16 +82,36 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
 
 Qt::ItemFlags MyModel::flags(const QModelIndex &index) const
 {
+    if (!index.isValid())
+      return 0;
 
+    return QAbstractItemModel::flags(index);
 }
 
 QVariant MyModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
 
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
+    switch(section)
+    {
+        case 0:
+  //      qDebug()<<item->name;
+        return rootItem->name;
+        break;
+
+        case 1:
+  //       qDebug()<<item->type;
+        return rootItem->type;
+        break;
+
+    }
+ return QVariant();
+
 }
 
 QModelIndex MyModel::index(int row, int column, const QModelIndex &parent) const
 {
+  //      qDebug()<<"MyModel::index";
     if (!hasIndex(row, column, parent))
       return QModelIndex();
 
@@ -125,6 +148,7 @@ QModelIndex MyModel::index(int row, int column, const QModelIndex &parent) const
 
 QModelIndex MyModel::parent(const QModelIndex &index) const
 {
+ //           qDebug()<<"MyModel::parent";
     if (!index.isValid())
       return QModelIndex();
 
@@ -140,6 +164,7 @@ QModelIndex MyModel::parent(const QModelIndex &index) const
 
 int MyModel::rowCount(const QModelIndex &parent) const
 {
+//                qDebug()<<"MyModel::rowCount";
     MyItem *parentItem;
     if (parent.column() > 0)
       return 0;
@@ -155,11 +180,14 @@ int MyModel::rowCount(const QModelIndex &parent) const
 
 int MyModel::columnCount(const QModelIndex &parent) const
 {
+   //                 qDebug()<<"MyModel::columnCount";
     return 2;
 }
 
 bool MyModel::append_item(const QModelIndex &index, MyItem *item)
 {
+//    this->beginResetModel();
+                        qDebug()<<"MyModel::append_item";
 
     MyItem *parent = static_cast<MyItem*>(index.internalPointer());
 
@@ -169,5 +197,7 @@ bool MyModel::append_item(const QModelIndex &index, MyItem *item)
 
     item->m_parent=parent;
 
+    emit dataChanged(index,index);
+//this->endResetModel();
     return true;
 }

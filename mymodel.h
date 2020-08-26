@@ -29,6 +29,9 @@ public:
 private:
 
     MyItem *rootItem;
+
+signals:
+    void dataChanged(const QModelIndex & topLeft, const QModelIndex & bottomRight);
 };
 
 #endif // MYMODEL_H

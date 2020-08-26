@@ -18,14 +18,16 @@ SOURCES += main.cpp\
     treemodel.cpp \
     mytreeview.cpp \
     myitem.cpp \
-    mymodel.cpp
+    mymodel.cpp \
+    newmodel.cpp
 
 HEADERS  += mainwindow.h \
     treeitem.h \
     treemodel.h \
     mytreeview.h \
     myitem.h \
-    mymodel.h
+    mymodel.h \
+    newmodel.h
 
 FORMS    += mainwindow.ui
 
