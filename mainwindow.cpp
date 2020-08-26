@@ -56,6 +56,7 @@ connect(this->model,SIGNAL(dataChanged(QModelIndex,QModelIndex)),
 
        this->ui->treeView->setModel(model);
  this->ui->treeView->expandAll();
+this->ui->treeView->setColumnHidden(1, true);
 
  //       this->ui->treeView->setWindowTitle(QObject::tr("Molecules"));
  //      this->ui->treeView->show();

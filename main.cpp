@@ -10,6 +10,13 @@ int main(int argc, char *argv[])
 {
 
 
+    /*  git add --all
+     *  git commit -m "comment"
+     *  git push origin master
+     *
+     *
+     */
+
 
    QApplication a(argc, argv);
 
