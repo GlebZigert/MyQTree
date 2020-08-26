@@ -198,8 +198,10 @@ bool MyModel::append_item(const QModelIndex &index, MyItem *item)
 
     item->m_parent=parent;
 
-  //  emit dataChanged(index,index);
+
     this->endInsertRows();
+    emit dataChanged(index,index);
+
 //this->endResetModel();
     return true;
 }
@@ -226,9 +228,11 @@ bool MyModel::delete_item(const QModelIndex &index)
 
     }*/
 
-  //  emit dataChanged(index,index);
+
     //emit dataChanged(index,index);
     this->endRemoveRows();
+    emit dataChanged(index,index);
+
 }
 
 void MyModel::test(const QModelIndex &index)

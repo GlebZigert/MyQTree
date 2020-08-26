@@ -10,9 +10,16 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
+
+
+
     this->current_index=nullptr;
 
 model=new MyModel();
+
+connect(this->model,SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+        this, SLOT(expand_all()));
 
 /*
      QFile file(":/default.txt");
@@ -48,7 +55,7 @@ model=new MyModel();
 */
 
        this->ui->treeView->setModel(model);
-
+ this->ui->treeView->expandAll();
 
  //       this->ui->treeView->setWindowTitle(QObject::tr("Molecules"));
  //      this->ui->treeView->show();
@@ -126,4 +133,15 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_2_clicked()
 {
     model->delete_item(model->index(current_index->row(),0,current_index->parent()));
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    this->ui->treeView->expandAll();
+}
+
+void MainWindow::expand_all()
+{
+    qDebug()<<"expand_all";
+    this->ui->treeView->expandAll();
 }
