@@ -186,6 +186,7 @@ int MyModel::columnCount(const QModelIndex &parent) const
 
 bool MyModel::append_item(const QModelIndex &index, MyItem *item)
 {
+    this->beginInsertRows(index.parent(),index.row(),index.row());
 //    this->beginResetModel();
                         qDebug()<<"MyModel::append_item";
 
@@ -197,7 +198,77 @@ bool MyModel::append_item(const QModelIndex &index, MyItem *item)
 
     item->m_parent=parent;
 
-    emit dataChanged(index,index);
+  //  emit dataChanged(index,index);
+    this->endInsertRows();
 //this->endResetModel();
     return true;
 }
+
+bool MyModel::delete_item(const QModelIndex &index)
+{
+    this->beginRemoveRows(index.parent(),index.row(),index.row());
+    MyItem *parent = static_cast<MyItem*>(this->parent(index).internalPointer());
+
+    parent->m_child_list.removeAt(index.row());
+
+
+
+   /* MyItem *item = static_cast<MyItem*>(index.internalPointer());
+
+    int res=1;
+
+    while(1==res)
+    {
+
+     if(this->rowCount(index)>0)
+         index=this->index(0,0,index);
+
+
+    }*/
+
+  //  emit dataChanged(index,index);
+    //emit dataChanged(index,index);
+    this->endRemoveRows();
+}
+
+void MyModel::test(const QModelIndex &index)
+{
+/*    int res=1;
+
+    while(1==res)
+    {
+        qDebug()<<this->data(this->index(index.row(),0,index.parent()),Qt::DisplayRole);
+        QModelIndex child,parent;
+        parent=index.parent();
+        child=this->index(0,0,index);
+        if(child.isValid())
+        {
+            qDebug()<<"have a child";
+            index=this->index(index.row(),0,parent);
+
+        }
+        else
+        {
+         qDebug()<<"NO child";
+         res=0;
+
+        }
+
+    }*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

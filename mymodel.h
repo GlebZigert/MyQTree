@@ -5,6 +5,8 @@
 #include "myitem.h"
 #include <QModelIndex>
 #include<QAbstractItemModel>
+#include <qtypetraits.h>
+#include <qtypetraits.h>
 
 class MyModel : public QAbstractItemModel
 {
@@ -24,6 +26,11 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
 
     bool append_item(const QModelIndex &index, MyItem *item);
+    bool delete_item(const QModelIndex &index);
+
+    void test(const QModelIndex &index);
+
+
 
 
 private:

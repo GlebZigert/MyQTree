@@ -13,7 +13,8 @@ MyItem::MyItem(MyItem *mparent)
 
 MyItem::~MyItem()
 {
-
+    qDebug()<<"delete Item"<<this->name;
+qDeleteAll( m_child_list);
 }
 
 int MyItem::row() const

@@ -49,6 +49,7 @@ model=new MyModel();
 
        this->ui->treeView->setModel(model);
 
+
  //       this->ui->treeView->setWindowTitle(QObject::tr("Molecules"));
  //      this->ui->treeView->show();
 
@@ -121,3 +122,8 @@ void MainWindow::on_pushButton_clicked()
 
 
 
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    model->delete_item(model->index(current_index->row(),0,current_index->parent()));
+}
