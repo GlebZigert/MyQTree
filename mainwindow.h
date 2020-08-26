@@ -37,6 +37,10 @@ private slots:
 
 
 
+    void on_treeView_activated(const QModelIndex &index);
+
+    void on_treeView_entered(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
 

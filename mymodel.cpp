@@ -186,6 +186,9 @@ int MyModel::columnCount(const QModelIndex &parent) const
 
 bool MyModel::append_item(const QModelIndex &index, MyItem *item)
 {
+    if (index.isValid())
+    {
+
     this->beginInsertRows(index.parent(),index.row(),index.row());
 //    this->beginResetModel();
                         qDebug()<<"MyModel::append_item";
@@ -204,6 +207,9 @@ bool MyModel::append_item(const QModelIndex &index, MyItem *item)
 
 //this->endResetModel();
     return true;
+    }
+    qDebug()<<"not valid!!!";
+    return false;
 }
 
 bool MyModel::delete_item(const QModelIndex &index)

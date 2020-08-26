@@ -83,7 +83,16 @@ this->ui->lineEdit_3->setText(QString::number(model->rowCount(index)));
 
 void MainWindow::on_pushButton_clicked()
 {
+
+
+    qDebug()<<"treePosition(); "<<this->ui->treeView->treePosition();
     int res=1;
+
+
+    QModelIndex current=this->ui->treeView->currentIndex();
+
+
+
     if (current_index==nullptr)
     {
         res=0;
@@ -112,8 +121,11 @@ void MainWindow::on_pushButton_clicked()
           MyItem *item=new MyItem(nullptr);
           item->name=name;
           item->type=type;
-          model->append_item(model->index(current_index->row(),0,current_index->parent()),item);
+          model->append_item(model->index(current.row(),0,current.parent()),item);
 
+
+
+         this->ui->treeView->setCurrentIndex(model->index(current.row(),0,current.parent()));
       }
 
 
@@ -132,16 +144,30 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    model->delete_item(model->index(current_index->row(),0,current_index->parent()));
+    QModelIndex current=this->ui->treeView->currentIndex();
+    model->delete_item(model->index(current.row(),0,current.parent()));
+
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
     this->ui->treeView->expandAll();
+
 }
 
 void MainWindow::expand_all()
 {
     qDebug()<<"expand_all";
     this->ui->treeView->expandAll();
+
+}
+
+void MainWindow::on_treeView_activated(const QModelIndex &index)
+{
+    qDebug()<<"activated";
+}
+
+void MainWindow::on_treeView_entered(const QModelIndex &index)
+{
+    qDebug()<<"entered";
 }
