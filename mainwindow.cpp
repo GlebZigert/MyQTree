@@ -3,6 +3,7 @@
 #include <QDebug>
 
 #include "mymodel.h"
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -152,7 +153,7 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    model->load_settings();
+    //model->load_settings();
     /*
     this->ui->treeView->expandAll();
 
@@ -189,4 +190,13 @@ void MainWindow::on_treeView_entered(const QModelIndex &index)
 void MainWindow::on_pushButton_4_clicked()
 {
 model->save_settings();
+}
+
+void MainWindow::on_action_2_triggered()
+{
+    qDebug()<<"Open";
+    this->path=QFileDialog::getOpenFileName(this, "open file");
+    qDebug()<<"ini file path: "<<path;
+    model->load_settings(path);
+
 }

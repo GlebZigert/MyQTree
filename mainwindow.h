@@ -28,6 +28,8 @@ public:
 
    bool val;
 
+   QString path;
+
 private slots:
     void on_treeView_clicked(const QModelIndex &index);
 
@@ -45,6 +47,10 @@ private slots:
     void on_treeView_entered(const QModelIndex &index);
 
     void on_pushButton_4_clicked();
+
+    void on_action_2_triggered();
+
+
 
 private:
     Ui::MainWindow *ui;

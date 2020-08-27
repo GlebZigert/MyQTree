@@ -33,10 +33,11 @@ public:
     void test(const QModelIndex &index);
 
 
-    int load_settings();
+    int load_settings(QString ini_file);
 
     int save_settings();
 
+    QString path;
 
 
 

@@ -300,9 +300,12 @@ void MyModel::test(const QModelIndex &index)
     }*/
 }
 
-int MyModel::load_settings()
+int MyModel::load_settings(QString ini_file)
 {
-    QSettings settings("/home/gleb/MyTree/rifx.ini",QSettings::IniFormat);
+
+
+   // QSettings settings("/home/gleb/MyTree/rifx.ini",QSettings::IniFormat);
+    QSettings settings(ini_file,QSettings::IniFormat);
     settings.beginGroup("TREE");
     int count=settings.value("Count",-1).toInt();
     qDebug()<<"device count: "<<count;
