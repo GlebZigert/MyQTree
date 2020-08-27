@@ -2,6 +2,7 @@
 #define MYITEM_H
 
 #include<QList>
+#include <QPixmap>
 
 
 
@@ -26,8 +27,8 @@ int childCount() const;
    QString name;
    QString type;
 
-
-
+QPixmap viewPXM; //отображаемая иконка
+ QPixmap getViewPxm();
 
 private:
 

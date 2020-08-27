@@ -57,14 +57,43 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
    //     qDebug()<<"!index.isValid()";
       return QVariant();
      }
-    if (role != Qt::DisplayRole)
+
+     MyItem *item = static_cast<MyItem*>(index.internalPointer());
+
+
+    if(role == Qt::DecorationRole/* &&
+       rootItem != item*/)
     {
-    //     qDebug()<<"ole != Qt::DisplayRole";
-      return QVariant();
+         qDebug()<<"[pxm]";
+        QPixmap pxm;
+        switch(index.column())
+        {
+            case 0:
+            {
+            qDebug()<<"[pxm]";
+                pxm = item->getViewPxm();
+                break;
+            }
+            case 2:
+            {
+            //    pxm = item->getViewRssiPxm();
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+        if(pxm.isNull())
+            return QVariant();
+         return QVariant(pxm);
     }
 
-    MyItem *item = static_cast<MyItem*>(index.internalPointer());
 
+
+
+
+if (role == Qt::DisplayRole)
     switch(index.column())
     {
         case 0:
@@ -78,6 +107,9 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
         break;
 
     }
+
+ return QVariant();
+
 }
 
 Qt::ItemFlags MyModel::flags(const QModelIndex &index) const
@@ -266,6 +298,8 @@ void MyModel::test(const QModelIndex &index)
 
     }*/
 }
+
+
 
 
 

@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>default.txt</file>
         <file>default_1.txt</file>
+        <file>icons/SO_green_20x20.png</file>
     </qresource>
 </RCC>

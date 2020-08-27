@@ -8,6 +8,9 @@
 
 MyItem::MyItem(MyItem *mparent)
 {
+    this->viewPXM=QPixmap(":/icons/SO_green_20x20.png");
+
+
     this->m_parent=mparent;
 }
 
@@ -26,6 +29,11 @@ int MyItem::row() const
 int MyItem::childCount() const
 {
     return this->m_child_list.count();
+}
+
+QPixmap MyItem::getViewPxm()
+{
+    return  viewPXM;
 }
 
 

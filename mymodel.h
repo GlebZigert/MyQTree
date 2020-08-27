@@ -7,6 +7,7 @@
 #include<QAbstractItemModel>
 #include <qtypetraits.h>
 #include <qtypetraits.h>
+#include <QPixmap>
 
 class MyModel : public QAbstractItemModel
 {
@@ -29,6 +30,8 @@ public:
     bool delete_item(const QModelIndex &index);
 
     void test(const QModelIndex &index);
+
+
 
 
 

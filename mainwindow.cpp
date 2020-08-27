@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
+this->ui->test_pxm_label->setPixmap(QPixmap(":/icons/SO_green_20x20.png"));
 
 
 
