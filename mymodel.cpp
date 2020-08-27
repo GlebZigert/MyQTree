@@ -6,6 +6,14 @@ MyModel::MyModel(QObject *parent)
     : QAbstractItemModel(parent)
 {
     this->rootItem=new MyItem(nullptr);
+
+    MyItem *item = new MyItem(nullptr);
+    item->name="Система";
+    item->type="Система";
+    rootItem->m_child_list.append(item);
+
+    item->m_parent=rootItem;
+    /*
         rootItem->name="Root";
         rootItem->type="device";
 
@@ -43,6 +51,7 @@ MyModel::MyModel(QObject *parent)
         item5->type="5 block";
 
         this->append_item(this->index(0,0),item5);
+        */
 }
 
 MyModel::~MyModel()
@@ -302,6 +311,13 @@ void MyModel::test(const QModelIndex &index)
 
 int MyModel::load_settings(QString ini_file)
 {
+    rootItem->m_child_list.clear();
+    MyItem *item = new MyItem(nullptr);
+    item->name="Система";
+    item->type="Система";
+    rootItem->m_child_list.append(item);
+
+    item->m_parent=rootItem;
 
 
    // QSettings settings("/home/gleb/MyTree/rifx.ini",QSettings::IniFormat);
@@ -330,6 +346,7 @@ int MyModel::load_settings(QString ini_file)
     */
 
 
+
     QList<MyItem> ls_item;
     for(int index=0;index<count;index++)
     {
@@ -349,7 +366,9 @@ int MyModel::load_settings(QString ini_file)
             if(!tmpItem->name.isEmpty())
             {
 
-                this->append_item(ind,tmpItem);
+                this->append_item(ind,tmpItem); //надо не добавлять по одиночке к руту
+
+                                                //надо собрать дерево и записать указатель на дерево в переменную рута.
             }
 
 
