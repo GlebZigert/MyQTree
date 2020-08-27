@@ -1,5 +1,6 @@
 #include "mymodel.h"
 #include <QDebug>
+//#include <QStringList>
 
 MyModel::MyModel(QObject *parent)
     : QAbstractItemModel(parent)
@@ -64,13 +65,13 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
     if(role == Qt::DecorationRole/* &&
        rootItem != item*/)
     {
-         qDebug()<<"[pxm]";
+     //    qDebug()<<"[pxm]";
         QPixmap pxm;
         switch(index.column())
         {
             case 0:
             {
-            qDebug()<<"[pxm]";
+       //     qDebug()<<"[pxm]";
                 pxm = item->getViewPxm();
                 break;
             }
@@ -297,6 +298,75 @@ void MyModel::test(const QModelIndex &index)
         }
 
     }*/
+}
+
+int MyModel::load_settings()
+{
+    QSettings settings("/home/gleb/MyTree/rifx.ini",QSettings::IniFormat);
+    settings.beginGroup("TREE");
+    int count=settings.value("Count",-1).toInt();
+    qDebug()<<"device count: "<<count;
+    settings.endGroup();
+
+    if(0>=count)
+        return 0;
+
+
+
+    settings.setIniCodec( "Windows-1251" );
+
+
+    QModelIndex ind=this->index(0,0);
+    qDebug()<<"DATA..."<<this->data(ind,Qt::DisplayRole).toString();
+
+
+    /*
+    QStringList ls_childgroup=settings.childGroups();
+    for(int i=0;i<ls_childgroup.count();i++)
+        qDebug()<<ls_childgroup.at(i);
+    */
+
+
+    QList<MyItem> ls_item;
+    for(int index=0;index<count;index++)
+    {
+        QString strGroup("Obj_%1");
+    //    qDebug()<<strGroup;
+        strGroup=strGroup.arg(index+1);
+    //    qDebug()<<strGroup;
+    //    qDebug()<<"==================";
+        if(settings.childGroups().contains(strGroup))
+        {
+            settings.beginGroup(strGroup);
+
+            MyItem *tmpItem = new MyItem(nullptr);
+            tmpItem->name=settings.value("Name", -1).toString();
+            tmpItem->type=settings.value("Type", -1).toString();
+
+            if(!tmpItem->name.isEmpty())
+            {
+
+                this->append_item(ind,tmpItem);
+            }
+
+
+
+            settings.endGroup();
+
+        }
+
+    }
+
+
+
+}
+
+int MyModel::save_settings()
+{
+   QSettings settings("/home/gleb/MyTree/rifx1.ini",QSettings::IniFormat);
+   settings.beginGroup("MY_TREE");
+   settings.setValue("My_name","Winner");
+   settings.endGroup();
 }
 
 

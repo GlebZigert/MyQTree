@@ -10,9 +10,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-this->ui->test_pxm_label->setPixmap(QPixmap(":/icons/SO_green_20x20.png"));
 
 
+this->val=true;
 
     this->current_index=nullptr;
 
@@ -152,8 +152,21 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_3_clicked()
 {
+    model->load_settings();
+    /*
     this->ui->treeView->expandAll();
 
+    if(val)
+    {
+        val=false;
+        this->ui->groupBox->hide();
+    }
+    else
+    {
+        val=true;
+        this->ui->groupBox->show();
+    }
+*/
 }
 
 void MainWindow::expand_all()
@@ -171,4 +184,9 @@ void MainWindow::on_treeView_activated(const QModelIndex &index)
 void MainWindow::on_treeView_entered(const QModelIndex &index)
 {
     qDebug()<<"entered";
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+model->save_settings();
 }

@@ -33,6 +33,7 @@ int MyItem::childCount() const
 
 QPixmap MyItem::getViewPxm()
 {
+
     return  viewPXM;
 }
 

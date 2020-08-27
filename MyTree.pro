@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     mytreeview.cpp \
     myitem.cpp \
     mymodel.cpp \
-    newmodel.cpp
+    newmodel.cpp \
+    settingutils.cpp
 
 HEADERS  += mainwindow.h \
     treeitem.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     mytreeview.h \
     myitem.h \
     mymodel.h \
-    newmodel.h
+    newmodel.h \
+    settingutils.h
 
 FORMS    += mainwindow.ui
 

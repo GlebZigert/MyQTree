@@ -26,6 +26,8 @@ public:
 
    const QModelIndex *current_index;
 
+   bool val;
+
 private slots:
     void on_treeView_clicked(const QModelIndex &index);
 
@@ -37,9 +39,12 @@ private slots:
 
 
 
+
     void on_treeView_activated(const QModelIndex &index);
 
     void on_treeView_entered(const QModelIndex &index);
+
+    void on_pushButton_4_clicked();
 
 private:
     Ui::MainWindow *ui;

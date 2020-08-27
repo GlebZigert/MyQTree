@@ -8,6 +8,7 @@
 #include <qtypetraits.h>
 #include <qtypetraits.h>
 #include <QPixmap>
+#include<QSettings>
 
 class MyModel : public QAbstractItemModel
 {
@@ -31,6 +32,10 @@ public:
 
     void test(const QModelIndex &index);
 
+
+    int load_settings();
+
+    int save_settings();
 
 
 
