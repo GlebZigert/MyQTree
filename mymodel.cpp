@@ -256,6 +256,8 @@ bool MyModel::append_item(const QModelIndex &index, MyItem *item)
 
 bool MyModel::delete_item(const QModelIndex &index)
 {
+    if(this->parent(index).isValid())
+    {
     this->beginRemoveRows(index.parent(),index.row(),index.row());
     MyItem *parent = static_cast<MyItem*>(this->parent(index).internalPointer());
 
@@ -280,7 +282,9 @@ bool MyModel::delete_item(const QModelIndex &index)
     //emit dataChanged(index,index);
     this->endRemoveRows();
     emit dataChanged(index,index);
-
+    }
+    else
+    qDebug()<<"no valid";
 }
 
 void MyModel::test(const QModelIndex &index)
@@ -383,12 +387,39 @@ int MyModel::load_settings(QString ini_file)
 
 }
 
-int MyModel::save_settings()
+int MyModel::save_settings(QString path)
 {
-   QSettings settings("/home/gleb/MyTree/rifx1.ini",QSettings::IniFormat);
-   settings.beginGroup("MY_TREE");
-   settings.setValue("My_name","Winner");
+  QModelIndex ind=this->index(0,0);
+  qDebug()<<this->data(ind,Qt::DisplayRole).toString();
+
+   QSettings settings(path,QSettings::IniFormat);
+
+   settings.clear();
+   settings.beginGroup("TREE");
+
+   qDebug()<<this->rowCount(ind);
+   settings.setValue("Count",this->rowCount(ind));
    settings.endGroup();
+
+
+
+   for(int i=0;i<this->rowCount(ind);i++)
+   {
+        QString strGroup("Obj_%1");
+        strGroup=strGroup.arg(i+1);
+
+        settings.beginGroup(strGroup);
+
+
+        settings.setValue("Name",this->data(this->index(i,0,ind),Qt::DisplayRole).toString());
+        settings.setValue("Type",this->data(this->index(i,1,ind),Qt::DisplayRole).toString());
+
+        settings.endGroup();
+
+
+   }
+
+   /**/
 }
 
 

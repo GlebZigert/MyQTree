@@ -35,7 +35,7 @@ public:
 
     int load_settings(QString ini_file);
 
-    int save_settings();
+    int save_settings(QString ini_file);
 
     QString path;
 

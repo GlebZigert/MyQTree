@@ -173,6 +173,7 @@
     </property>
     <addaction name="action_2"/>
     <addaction name="action_3"/>
+    <addaction name="action"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -185,6 +186,11 @@
   <action name="action_3">
    <property name="text">
     <string>Сохранить</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>Сохранить как</string>
    </property>
   </action>
  </widget>
