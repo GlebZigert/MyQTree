@@ -159,6 +159,12 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_3_clicked()
 {
+
+    qDebug()<<"TEST";
+
+    this->model->test();
+
+
     //model->load_settings();
     /*
     this->ui->treeView->expandAll();

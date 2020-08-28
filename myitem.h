@@ -27,6 +27,8 @@ int childCount() const;
    QString name;
    QString type;
 
+   void show_children();
+
 QPixmap viewPXM; //отображаемая иконка
  QPixmap getViewPxm();
 

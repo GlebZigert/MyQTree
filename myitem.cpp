@@ -31,6 +31,17 @@ int MyItem::childCount() const
     return this->m_child_list.count();
 }
 
+void MyItem::show_children()
+{
+    qDebug()<<"---------";
+    qDebug()<<this->name;
+    qDebug()<<this->type;
+    for(int i=0;i<this->m_child_list.count();i++)
+    {
+     this->m_child_list.at(i)->show_children();
+    }
+}
+
 QPixmap MyItem::getViewPxm()
 {
 

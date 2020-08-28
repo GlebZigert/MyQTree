@@ -13,6 +13,43 @@ MyModel::MyModel(QObject *parent)
     rootItem->m_child_list.append(item);
 
     item->m_parent=rootItem;
+
+    MyItem *item1=new MyItem(nullptr);
+     item1->name="1";
+     item1->type="1";
+     item->m_child_list.append(item1);
+
+     item1->m_parent=item;
+
+     MyItem *item11=new MyItem(nullptr);
+      item11->name="11";
+      item11->type="11";
+      item1->m_child_list.append(item11);
+
+      item11->m_parent=item1;
+
+      MyItem *item12=new MyItem(nullptr);
+       item12->name="12";
+       item12->type="12";
+       item1->m_child_list.append(item12);
+
+       item12->m_parent=item1;
+
+
+     MyItem *item2=new MyItem(nullptr);
+      item2->name="2";
+      item2->type="2";
+      item->m_child_list.append(item2);
+
+      item2->m_parent=item;
+
+      MyItem *item3=new MyItem(nullptr);
+       item3->name="3";
+       item3->type="3";
+       item->m_child_list.append(item3);
+
+       item3->m_parent=item;
+
     /*
         rootItem->name="Root";
         rootItem->type="device";
@@ -287,14 +324,84 @@ bool MyModel::delete_item(const QModelIndex &index)
     qDebug()<<"no valid";
 }
 
-void MyModel::test(const QModelIndex &index)
+void MyModel::test()
 {
-/*    int res=1;
+    int res=1;
+    QModelIndex parent=this->index(0,0);
 
+    qDebug()<<this->data(parent,Qt::DisplayRole);
+
+
+    QModelIndex ind=this->index(0,0,parent);
+
+int row=0;
+
+    qDebug()<<this->data(this->index(row,0,ind.parent()),Qt::DisplayRole).toString();
+    qDebug()<<this->data(this->index(row,1,ind.parent()),Qt::DisplayRole).toString();
+
+    int rows=this->rowCount(ind.parent());
+    qDebug()<<"rows: "<<rows;
+
+    rootItem->show_children();
+
+/*
     while(1==res)
+        {
+     qDebug()<<"--------------------------------------";
+     qDebug()<<this->data(this->index(row,0,ind.parent()),Qt::DisplayRole).toString();
+     qDebug()<<this->data(this->index(row,1,ind.parent()),Qt::DisplayRole).toString();
+
+     if(this->rowCount(ind))
+     {
+     ind=this->index(0,0,ind);
+             row=0;
+
+     }
+     else
+     if(row<this->rowCount(ind.parent())-1)
+     {
+     row++;
+     }
+     else
+     if(ind.parent().isValid())
+     {
+         parent=ind.parent();
+         if(ind.row()<this->rowCount(parent)-1)
+         {
+
+         ind=this->index(ind.parent().row()+1,0,ind.parent().parent());
+         row=ind.row();
+         }
+         else
+             res=0;
+     }
+     else
+     {
+     res=0;
+     }
+
+
+        }/*
+
+
+ /*    while(1==res)
     {
-        qDebug()<<this->data(this->index(index.row(),0,index.parent()),Qt::DisplayRole);
-        QModelIndex child,parent;
+ qDebug()<<"--------------------------------------";
+ qDebug()<<this->data(this->index(row,0,ind.parent()),Qt::DisplayRole);
+ qDebug()<<this->data(this->index(row,1,ind.parent()),Qt::DisplayRole);
+
+ row=ind.row()+1;
+
+    if(row<this->rowCount(ind.parent()))
+    {
+        ind=(row,0,ind.parent());
+
+    }
+    else
+    {
+        res=0;
+    }
+       QModelIndex child,parent;
         parent=index.parent();
         child=this->index(0,0,index);
         if(child.isValid())
@@ -400,6 +507,7 @@ int MyModel::save_settings(QString path)
    qDebug()<<this->rowCount(ind);
    settings.setValue("Count",this->rowCount(ind));
    settings.endGroup();
+
 
 
 

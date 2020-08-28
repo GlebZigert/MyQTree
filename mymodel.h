@@ -30,12 +30,14 @@ public:
     bool append_item(const QModelIndex &index, MyItem *item);
     bool delete_item(const QModelIndex &index);
 
-    void test(const QModelIndex &index);
+    void test();
 
 
     int load_settings(QString ini_file);
 
     int save_settings(QString ini_file);
+
+
 
     QString path;
 
