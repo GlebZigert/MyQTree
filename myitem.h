@@ -3,6 +3,7 @@
 
 #include<QList>
 #include <QPixmap>
+#include<QSettings>
 
 
 
@@ -27,7 +28,9 @@ int childCount() const;
    QString name;
    QString type;
 
-   void show_children();
+   void show_children(QSettings *settings,QString parrent, int cnt);
+
+
 
 QPixmap viewPXM; //отображаемая иконка
  QPixmap getViewPxm();

@@ -8,8 +8,8 @@ MyModel::MyModel(QObject *parent)
     this->rootItem=new MyItem(nullptr);
 
     MyItem *item = new MyItem(nullptr);
-    item->name="Система";
-    item->type="Система";
+    item->name="System";
+    item->type="System";
     rootItem->m_child_list.append(item);
 
     item->m_parent=rootItem;
@@ -342,7 +342,7 @@ int row=0;
     int rows=this->rowCount(ind.parent());
     qDebug()<<"rows: "<<rows;
 
-    rootItem->show_children();
+   // rootItem->show_children();
 
 /*
     while(1==res)
@@ -503,7 +503,17 @@ int MyModel::save_settings(QString path)
 
    settings.clear();
    settings.beginGroup("TREE");
+ //  qDebug()<<"TREE";
+//   qDebug()<<"Count"<<this->rowCount(ind);
+   settings.setValue("Count",this->rowCount(ind));
+   settings.endGroup();
 
+   MyItem *item = static_cast<MyItem*>(ind.internalPointer());
+
+
+   if(item->childCount()>0)
+   item->show_children(&settings,"",0);
+   /*
    qDebug()<<this->rowCount(ind);
    settings.setValue("Count",this->rowCount(ind));
    settings.endGroup();
@@ -527,7 +537,7 @@ int MyModel::save_settings(QString path)
 
    }
 
-   /**/
+   */
 }
 
 
