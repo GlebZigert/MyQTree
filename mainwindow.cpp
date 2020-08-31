@@ -26,21 +26,27 @@ MainWindow::MainWindow(QWidget *parent) :
     //Точка/Гарда
 
     QVBoxLayout *CD_box_Layout=new QVBoxLayout();
+
+ CD_box_Layout->addWidget(this->ui->CD_label_Num2    );
 CD_box_Layout->addWidget(this->ui->CD_label_);
 CD_box_Layout->addWidget(this->ui ->CD_label_1  );
 CD_box_Layout->addWidget(this->ui->CD_label_2    );
 CD_box_Layout->addWidget(this->ui->CD_label_3    );
 CD_box_Layout->addWidget(this->ui->CD_label_4    );
 CD_box_Layout->addWidget(this->ui->CD_label_5    );
-CD_box_Layout->addWidget(this->ui->CD_label_Num2    );
+
 
  QVBoxLayout *CD_box_Layout_1=new QVBoxLayout();
+
+ CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_Num2    );
+ CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_DK    );
+
+
 CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_Bazalt    );
 CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_ConnectBlock    );
-CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_DK    );
-CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_Num2    );
-CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_UdpAdress    );
 CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_UdpUse    );
+
+CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_UdpAdress    );
 CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_UpdPort    );
 
 QHBoxLayout *CD_H_box_layout=new QHBoxLayout();
@@ -176,10 +182,59 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index)
     current_index=&index;
 QModelIndex ind_name=model->index(index.row(),0,index.parent());
 QModelIndex ind_type=model->index(index.row(),1,index.parent());
-QString name=model->data(ind_name, Qt::DisplayRole).toString();;
+
+
+
+QString name=model->data(ind_name, Qt::DisplayRole).toString();
 QString type=model->data(ind_type, Qt::DisplayRole).toString();
+
+if(type=="СД")
+{
+    qDebug()<<"type = СД";
+ this->ui->comboBox->setCurrentIndex(1);
+    this->ui->label->setPixmap(QPixmap(":/icons/СД.png"));
+    this->ui->stackedWidget->setCurrentWidget(this->ui->CD_groupBox);
+
+       MyItem *item = static_cast<MyItem*>(index.internalPointer());
+
+       qDebug()<<"Num2"<<item->Num2  ;
+this->ui->CD_lineEdit_Num2->setText(QString::number((item->Num2)));
+
+         qDebug()<<"DK"<<item->DK  ;
+ this->ui->CD_lineEdit_DK->setText(QString::number((item->DK)));
+
+  qDebug()<<"Bazalt"<<item->Bazalt  ;
+ this->ui->CD_lineEdit_Bazalt->setText(QString::number((item->Bazalt)));
+
+    qDebug()<<"ConnectBlock"<<item->ConnectBlock  ;
+ this->ui->CD_lineEdit_ConnectBlock->setText(QString::number((item->ConnectBlock)));
+
+      qDebug()<<"UdpUse"<<item->UdpUse  ;
+ this->ui->CD_lineEdit_UdpUse->setText(QString::number((item->UdpUse)));
+
+
+
+
+
+         /*
+
+this->ui->CD_lineEdit_DK->text()   =item->DK;
+
+
+this->ui->CD_lineEdit_Bazalt->text()   =item->Bazalt;
+this->ui->CD_lineEdit_ConnectBlock->text()    =item->ConnectBlock;
+this->ui->CD_lineEdit_UdpUse->text()  =item->UdpUse;
+
+this->ui->CD_lineEdit_UdpAdress->text()    =item->UdpAdress;
+this->ui->CD_lineEdit_UpdPort->text()   =item->UdpPort;
+*/
+}
 qDebug()<<name;
 qDebug()<<type;
+
+
+
+
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -221,9 +276,86 @@ void MainWindow::on_pushButton_clicked()
 qDebug()<<"Type: "<<type;
       if(type!="Группа")
       if(type!="СД")
+
       if(type!="ИУ")
       if(type!="Точка-Гарда")
           res=0;
+
+
+
+    int basalt;
+    int connectBlock;
+    int Num2;
+    bool ok;
+
+
+    if(type=="СД")
+    {
+        qDebug()<<"CD_lineEdit_Num2"<<this->ui->CD_lineEdit_Num2->text();
+        Num2=this->ui->CD_lineEdit_Num2->text().toInt(&ok,10);
+        if(ok)
+        {
+     //       if(Num2!=0)
+     //           Num2=0;
+            qDebug()<<"Num2"<<Num2;
+
+        }
+        else
+        {
+        qDebug()<<"Num2  ERROR";
+        res=0;
+        }
+
+
+
+
+
+
+
+      if(type=="СД")
+      {
+          qDebug()<<"CD_lineEdit_Bazalt"<<this->ui->CD_lineEdit_Bazalt->text();
+          basalt=this->ui->CD_lineEdit_Bazalt->text().toInt(&ok,10);
+          if(ok)
+          {
+              if(basalt!=0)
+                  basalt=1;
+              qDebug()<<"Basalt "<<basalt;
+
+          }
+          else
+          {
+          qDebug()<<"Basalt  ERROR";
+          res=0;
+          }
+
+
+
+
+
+
+          connectBlock=this->ui->CD_lineEdit_ConnectBlock->text().toInt(&ok,10);
+          if(ok)
+          {
+              if( connectBlock!=0)
+                   connectBlock=1;
+              qDebug()<<"ConnectBlock "<< connectBlock;
+
+          }
+          else
+          {
+          qDebug()<<" connectBlock  ERROR";
+          res=0;
+          }
+
+    }
+
+
+      }
+
+
+
+
 
 
       qDebug()<<"res "<<res;
@@ -231,7 +363,22 @@ qDebug()<<"Type: "<<type;
       {
           MyItem *item=new MyItem(nullptr,name,type);
 
+          if(type=="СД")
+          {
+              item->Num2=Num2;
+              item->Bazalt=basalt;
+            item->ConnectBlock=   connectBlock;
+          }
+
+
           model->append_item(model->index(current.row(),0,current.parent()),item);
+
+
+
+
+
+
+
 
 
 

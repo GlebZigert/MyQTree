@@ -42,7 +42,7 @@ QPixmap viewPXM; //отображаемая иконка
 
  static int ID;
 
-private:
+public:
 
  int Type;//=0
  int Num1;//=0

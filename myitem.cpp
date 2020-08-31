@@ -84,7 +84,7 @@ void MyItem::show_children(QSettings *settings,QString parrent, int cnt)
     strGroup.append("Obj-%1");
      strGroup=strGroup.arg(cnt+1);
      qDebug()<<"strGroup"<<strGroup;
-     settings->setIniCodec( "Windows-1251" );
+    // settings->setIniCodec( "Windows-1251" );
      settings->beginGroup(strGroup);
      settings->setValue("Name",this->name);
      settings->setValue("Type",this->type);
@@ -130,6 +130,17 @@ void MyItem::show_children_1(QSettings *settings, bool root)
      settings->beginGroup(strGroup);
      settings->setValue("Name",this->name);
      settings->setValue("Type",this->type);
+     if(this->type=="СД")
+     {
+         settings->setValue("Num2",this->Num2);
+         settings->setValue("DK",this->DK);
+         settings->setValue("Bazalt",this->Bazalt);
+         settings->setValue("ConnectBlock",this->ConnectBlock);
+     //    settings->setValue("UdpUse",this->UdpUse);
+        // settings->setValue("UdpAdress",this->UdpAdress);
+
+     }
+
      }
     else
     {
