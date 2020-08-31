@@ -170,6 +170,7 @@ qDebug()<<"model->rowCount(next_index) "<<model->rowCount(next_index);
 
 
     MainWindow w;
+
     w.show();
 
 

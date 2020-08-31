@@ -4,12 +4,108 @@
 
 #include "mymodel.h"
 #include <QFileDialog>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
+  //  setStyleSheet("background-color:while");
+ //   setAutoFillBackground(true);
     ui->setupUi(this);
+
+
+
+    this->ui->comboBox->addItem("Группа");
+    this->ui->comboBox->addItem("СД");
+    this->ui->comboBox->addItem("ИУ");
+//    this->ui->comboBox->addItem("ТВ-Камера 'Растр'");
+     this->ui->comboBox->addItem("Точка-Гарда");
+    //Точка/Гарда
+
+    QVBoxLayout *CD_box_Layout=new QVBoxLayout();
+CD_box_Layout->addWidget(this->ui->CD_label_);
+CD_box_Layout->addWidget(this->ui ->CD_label_1  );
+CD_box_Layout->addWidget(this->ui->CD_label_2    );
+CD_box_Layout->addWidget(this->ui->CD_label_3    );
+CD_box_Layout->addWidget(this->ui->CD_label_4    );
+CD_box_Layout->addWidget(this->ui->CD_label_5    );
+CD_box_Layout->addWidget(this->ui->CD_label_Num2    );
+
+ QVBoxLayout *CD_box_Layout_1=new QVBoxLayout();
+CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_Bazalt    );
+CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_ConnectBlock    );
+CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_DK    );
+CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_Num2    );
+CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_UdpAdress    );
+CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_UdpUse    );
+CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_UpdPort    );
+
+QHBoxLayout *CD_H_box_layout=new QHBoxLayout();
+
+CD_H_box_layout->addLayout(CD_box_Layout);
+CD_H_box_layout->addLayout(CD_box_Layout_1);
+
+this->ui->CD_groupBox->setLayout(CD_H_box_layout);
+
+
+QVBoxLayout *IU_box_Layout=new QVBoxLayout();
+IU_box_Layout->addWidget(this->ui->IU_label_1);
+IU_box_Layout->addWidget(this->ui ->IU_label_2  );
+IU_box_Layout->addWidget(this->ui->IU_label_3    );
+IU_box_Layout->addWidget(this->ui->IU_label_4    );
+
+
+QVBoxLayout *IU_box_Layout_1=new QVBoxLayout();
+IU_box_Layout_1->addWidget(this->ui->IU_lineEdit_Num2    );
+IU_box_Layout_1->addWidget(this->ui->IU_lineEdit_UdpAdress    );
+IU_box_Layout_1->addWidget(this->ui->IU_lineEdit_UdpUse    );
+IU_box_Layout_1->addWidget(this->ui->IU_lineEdit_UpdPort    );
+
+
+QHBoxLayout *IU_H_box_layout=new QHBoxLayout();
+
+IU_H_box_layout->addLayout(IU_box_Layout);
+IU_H_box_layout->addLayout(IU_box_Layout_1);
+
+this->ui->IU_groupBox->setLayout(IU_H_box_layout);
+
+QVBoxLayout *TG_box_Layout=new QVBoxLayout();
+TG_box_Layout->addWidget(this->ui->TG_label);
+TG_box_Layout->addWidget(this->ui ->TG_label_2  );
+TG_box_Layout->addWidget(this->ui->TG_label_3    );
+TG_box_Layout->addWidget(this->ui->TG_label_4    );
+TG_box_Layout->addWidget(this->ui->TG_label_5    );
+TG_box_Layout->addWidget(this->ui->TG_label_6    );
+
+QVBoxLayout *TG_box_Layout_1=new QVBoxLayout();
+TG_box_Layout_1->addWidget(this->ui->TG_lineEdit  );
+TG_box_Layout_1->addWidget(this->ui->TG_lineEdit_2    );
+TG_box_Layout_1->addWidget(this->ui->TG_lineEdit_3    );
+TG_box_Layout_1->addWidget(this->ui->TG_lineEdit_4    );
+TG_box_Layout_1->addWidget(this->ui->TG_lineEdit_5    );
+TG_box_Layout_1->addWidget(this->ui->TG_lineEdit_6  );
+
+QHBoxLayout *TG_H_box_layout=new QHBoxLayout();
+
+TG_H_box_layout->addLayout(TG_box_Layout);
+TG_H_box_layout->addLayout(TG_box_Layout_1);
+
+this->ui->TG_groupBox->setLayout(TG_H_box_layout);
+
+
+qDebug()<<"stack widget count  "<<this->ui->stackedWidget->count();
+int stack_index_1 =this->ui->stackedWidget->addWidget(this->ui->CD_groupBox);
+qDebug()<<"stack widget count  "<<this->ui->stackedWidget->count();
+int stack_index_2=this->ui->stackedWidget->addWidget(this->ui->IU_groupBox);
+
+qDebug()<<"stack widget count  "<<this->ui->stackedWidget->count();
+int stack_index_4=this->ui->stackedWidget->addWidget(this->ui->TG_groupBox);
+
+
+
 /*
   QFile file("/home/gleb/EXAMPLE.txt");
   file.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -84,9 +180,6 @@ QString name=model->data(ind_name, Qt::DisplayRole).toString();;
 QString type=model->data(ind_type, Qt::DisplayRole).toString();
 qDebug()<<name;
 qDebug()<<type;
-this->ui->lineEdit->setText(name);
-this->ui->lineEdit_2->setText(type);
-this->ui->lineEdit_3->setText(QString::number(model->rowCount(index)));
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -109,7 +202,9 @@ void MainWindow::on_pushButton_clicked()
 
 
     QString name=ui->name_item_to_append->text();
-     QString type=ui->type_item_to_append->text();
+  //   QString type=ui->type_item_to_append->text();
+     QString type=this->type;
+
      qDebug()<<name;
       qDebug()<<type;
       if(name=="")
@@ -123,12 +218,19 @@ void MainWindow::on_pushButton_clicked()
        res=0;
       qDebug()<<"empty type!!";
       }
+qDebug()<<"Type: "<<type;
+      if(type!="Группа")
+      if(type!="СД")
+      if(type!="ИУ")
+      if(type!="Точка-Гарда")
+          res=0;
 
+
+      qDebug()<<"res "<<res;
       if(1==res)
       {
-          MyItem *item=new MyItem(nullptr);
-          item->name=name;
-          item->type=type;
+          MyItem *item=new MyItem(nullptr,name,type);
+
           model->append_item(model->index(current.row(),0,current.parent()),item);
 
 
@@ -211,7 +313,7 @@ void MainWindow::on_action_2_triggered()
     this->path=QFileDialog::getOpenFileName(this, "open file","","*.ini");
 
     qDebug()<<"ini file path: "<<path;
-    model->load_settings(path);
+    model->load_settings_1(path);
 
 }
 
@@ -251,3 +353,41 @@ void MainWindow::on_action_triggered()
 
 
 
+
+void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
+{
+    qDebug()<<"on_comboBox_currentTextChanged(const QString &arg1)";
+    this->type=arg1;
+    qDebug()<<"type "<<this->type;
+this->ui->stackedWidget->setCurrentIndex(0);
+   //   this->ui->CD_groupBox->setVisible(false);
+
+    if(this->type=="СД")
+    {
+        this->ui->label->setPixmap(QPixmap(":/icons/СД.png"));
+        this->ui->stackedWidget->setCurrentWidget(this->ui->CD_groupBox);
+       // this->ui->CD_groupBox->setVisible(true);
+    }
+
+   if(this->type=="ИУ")
+   {
+        this->ui->stackedWidget->setCurrentWidget(this->ui->IU_groupBox);
+        this->ui->label->setPixmap(QPixmap(":/icons/ИУ.png"));
+}
+   if(this->type=="ТВ-Камера 'Растр'")
+        this->ui->label->setPixmap(QPixmap(":/icons/камера.png"));
+
+   if(this->type=="Точка-Гарда")
+   {
+  this->ui->stackedWidget ->setCurrentWidget(this->ui->TG_groupBox);
+     this->ui->label->setPixmap(QPixmap(":/icons/Точка-гарда.png"));
+   }
+
+
+
+  // if(this->type=="Точка/Гарда'")
+  //      this->viewPXM=QPixmap(":/icons/Точка-гарда.png");
+
+
+
+}

@@ -31,6 +31,9 @@ public:
    QString path;
 
 private slots:
+
+
+
     void on_treeView_clicked(const QModelIndex &index);
 
     void on_pushButton_clicked();
@@ -54,8 +57,13 @@ private slots:
 
     void on_action_triggered();
 
+    void on_comboBox_currentTextChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
+
+    QString type;
+    QString name;
 
 public slots:
 

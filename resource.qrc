@@ -3,5 +3,9 @@
         <file>default.txt</file>
         <file>default_1.txt</file>
         <file>icons/SO_green_20x20.png</file>
+        <file>icons/СД.png</file>
+        <file>icons/ИУ.png</file>
+        <file>icons/камера.png</file>
+        <file>icons/Точка-гарда.png</file>
     </qresource>
 </RCC>

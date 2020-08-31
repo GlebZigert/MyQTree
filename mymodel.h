@@ -35,6 +35,9 @@ public:
 
     int load_settings(QString ini_file);
 
+
+    int load_settings_1(QString ini_file);
+
     int save_settings(QString ini_file);
 
 

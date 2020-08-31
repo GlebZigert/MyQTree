@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>631</width>
-    <height>493</height>
+    <width>644</width>
+    <height>832</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>371</width>
-      <height>221</height>
+      <width>231</width>
+      <height>441</height>
      </rect>
     </property>
     <property name="animated">
@@ -30,119 +30,607 @@
      <bool>true</bool>
     </attribute>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="name_item_to_append">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>10</y>
-      <width>113</width>
+      <x>350</x>
+      <y>60</y>
+      <width>261</width>
       <height>27</height>
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>60</y>
-      <width>113</width>
-      <height>27</height>
+      <x>350</x>
+      <y>20</y>
+      <width>91</width>
+      <height>22</height>
      </rect>
     </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>10</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>20</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Тип объекта</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>10</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QStackedWidget" name="stackedWidget">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>110</y>
+      <width>391</width>
+      <height>271</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <widget class="QWidget" name="page_IU">
+     <widget class="QGroupBox" name="IU_groupBox">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>381</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Настройка  ИУ БЛ-IP</string>
+      </property>
+      <widget class="QLabel" name="IU_label_1">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>111</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Номер ИУ 1..4</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="IU_label_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>60</y>
+         <width>171</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Режим работы: UDP</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="IU_label_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>111</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>IP-адрес </string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="IU_label_4">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>171</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Номер порта</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="IU_lineEdit_Num2">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>30</y>
+         <width>151</width>
+         <height>27</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="IU_lineEdit_UdpUse">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>60</y>
+         <width>151</width>
+         <height>27</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="IU_lineEdit_UdpAdress">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>90</y>
+         <width>151</width>
+         <height>27</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="IU_lineEdit_UpdPort">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>120</y>
+         <width>151</width>
+         <height>27</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_TG">
+     <widget class="QLineEdit" name="TG_lineEdit_5">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>160</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="TG_lineEdit_3">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>100</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="TG_lineEdit_4">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>130</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="TG_lineEdit_2">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>70</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TG_label_3">
+      <property name="geometry">
+       <rect>
+        <x>16</x>
+        <y>110</y>
+        <width>171</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Выполнять команду ДК </string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TG_label_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>151</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Режим работы: UDP</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TG_label_2">
+      <property name="geometry">
+       <rect>
+        <x>26</x>
+        <y>80</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Номер ЧЭ 1..4</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TG_label_5">
+      <property name="geometry">
+       <rect>
+        <x>16</x>
+        <y>170</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>IP-адрес  </string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TG_label">
+      <property name="geometry">
+       <rect>
+        <x>26</x>
+        <y>50</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Адрес объекта</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="TG_lineEdit">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>40</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TG_label_6">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>200</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Номер порта </string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="TG_lineEdit_6">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>190</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="TG_groupBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Настройка Точка гарда</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_CD">
+     <widget class="QLabel" name="CD_label_1">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>161</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Режим работы: Замок</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="CD_lineEdit_UdpUse">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>160</y>
+        <width>151</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="CD_lineEdit_Bazalt">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>100</y>
+        <width>151</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="CD_lineEdit_Num2">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>40</y>
+        <width>151</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="CD_label_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>160</y>
+        <width>161</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Режим работы: UDP</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="CD_label_">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>80</y>
+        <width>171</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Выполнять команду ДК </string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="CD_lineEdit_UpdPort">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>220</y>
+        <width>151</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="CD_lineEdit_DK">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>70</y>
+        <width>151</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="CD_lineEdit_UdpAdress">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>190</y>
+        <width>151</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="CD_label_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>200</y>
+        <width>91</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>IP-адрес </string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="CD_lineEdit_ConnectBlock">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>130</y>
+        <width>151</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="CD_label_5">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>230</y>
+        <width>121</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Номер порта </string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="CD_label_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>140</y>
+        <width>201</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Режим работы: Блок связи </string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="CD_label_Num2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>50</y>
+        <width>111</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Номер СД 1..8</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="CD_groupBox">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>361</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Настройка СД БЛ-IP</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="CD_groupBox_2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>910</y>
+      <width>361</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Настройка СД БЛ-IP</string>
+    </property>
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>250</y>
+       <width>99</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ДОБАВИТЬ</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>250</y>
+       <width>99</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>УДАЛИТЬ</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>250</y>
+      <x>250</x>
+      <y>390</y>
       <width>99</width>
-      <height>71</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
-     <string>Append</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>110</y>
-      <width>113</width>
-      <height>27</height>
-     </rect>
+     <string>ДОБАВИТЬ</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>250</y>
-      <width>99</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Delete</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
       <x>360</x>
-      <y>250</y>
+      <y>390</y>
       <width>99</width>
-      <height>61</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
-     <string>expand all</string>
-    </property>
-   </widget>
-   <widget class="QGroupBox" name="groupBox">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>250</y>
-      <width>120</width>
-      <height>80</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>GroupBox</string>
-    </property>
-    <widget class="QLineEdit" name="name_item_to_append">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>10</y>
-       <width>113</width>
-       <height>27</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="type_item_to_append">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>40</y>
-       <width>113</width>
-       <height>27</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>260</y>
-      <width>99</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>SAVE</string>
+     <string>УДАЛИТЬ</string>
     </property>
    </widget>
   </widget>
@@ -151,7 +639,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>631</width>
+     <width>644</width>
      <height>25</height>
     </rect>
    </property>
@@ -178,6 +666,17 @@
    <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
   <action name="action_2">
    <property name="text">
     <string>Открыть</string>

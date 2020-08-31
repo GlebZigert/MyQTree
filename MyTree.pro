@@ -13,7 +13,9 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
+    id.cpp \
         mainwindow.cpp \
+    mynumber.cpp \
     treeitem.cpp \
     treemodel.cpp \
     mytreeview.cpp \
@@ -23,6 +25,8 @@ SOURCES += main.cpp\
     settingutils.cpp
 
 HEADERS  += mainwindow.h \
+    id.h \
+    mynumber.h \
     treeitem.h \
     treemodel.h \
     mytreeview.h \
