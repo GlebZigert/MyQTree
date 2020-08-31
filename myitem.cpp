@@ -26,7 +26,7 @@ MyItem::MyItem(MyItem *mparent)
 
 MyItem::MyItem(MyItem *mparent, QString name, QString type)
 {
-    this->name=name;
+    this->Name=name;
     this->type=type;
 
     if(this->type=="СД")
@@ -56,7 +56,7 @@ MyItem::MyItem(MyItem *mparent, QString name, QString type)
 
 MyItem::~MyItem()
 {
-    qDebug()<<"delete Item"<<this->name;
+    qDebug()<<"delete Item"<<this->Name;
 qDeleteAll( m_child_list);
 }
 
@@ -74,7 +74,7 @@ int MyItem::childCount() const
 void MyItem::show_children(QSettings *settings,QString parrent, int cnt)
 {
     qDebug()<<"---------";
-    qDebug()<<this->name;
+    qDebug()<<this->Name;
     qDebug()<<this->type;
 
     QString strGroup;
@@ -86,7 +86,7 @@ void MyItem::show_children(QSettings *settings,QString parrent, int cnt)
      qDebug()<<"strGroup"<<strGroup;
     // settings->setIniCodec( "Windows-1251" );
      settings->beginGroup(strGroup);
-     settings->setValue("Name",this->name);
+     settings->setValue("Name",this->Name);
      settings->setValue("Type",this->type);
 
 qDebug()<<"Count "<<this->m_child_list.count();
@@ -115,7 +115,7 @@ qDebug()<<"Count "<<this->m_child_list.count();
 void MyItem::show_children_1(QSettings *settings, bool root)
 {
     qDebug()<<"---------";
-    qDebug()<<this->name;
+    qDebug()<<this->Name;
     qDebug()<<this->type;
     if(!root)
     {
@@ -128,7 +128,7 @@ void MyItem::show_children_1(QSettings *settings, bool root)
      settings->setIniCodec( "Windows-1251" );
 
      settings->beginGroup(strGroup);
-     settings->setValue("Name",this->name);
+     settings->setValue("Name",this->Name);
      settings->setValue("Type",this->type);
      if(this->type=="СД")
      {

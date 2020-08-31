@@ -9,12 +9,12 @@ MyModel::MyModel(QObject *parent)
     ID::set_zero();
     this->rootItem=new MyItem(nullptr);
    // rootItem->ID=1;
-    rootItem->name="Дерево устройств";
+    rootItem->Name="Дерево устройств";
     rootItem->type="ROOT_TYPE";
 
     MyItem *item = new MyItem(nullptr);
    // qDebug()<<"id "<<item->ID;
-    item->name="System";
+    item->Name="System";
     item->type="System";
     rootItem->m_child_list.append(item);
 
@@ -153,7 +153,7 @@ if (role == Qt::DisplayRole)
     {
         case 0:
   //      qDebug()<<item->name;
-        return item->name;
+        return item->Name;
         break;
 
         case 1:
@@ -183,7 +183,7 @@ QVariant MyModel::headerData(int section, Qt::Orientation orientation, int role)
     {
         case 0:
   //      qDebug()<<item->name;
-        return rootItem->name;
+        return rootItem->Name;
         break;
 
         case 1:
@@ -432,7 +432,7 @@ int MyModel::load_settings(QString ini_file)
 {
     rootItem->m_child_list.clear();
     MyItem *item = new MyItem(nullptr);
-    item->name="System";
+    item->Name="System";
     item->type="System";
     rootItem->m_child_list.append(item);
 
@@ -479,10 +479,10 @@ int MyModel::load_settings(QString ini_file)
             settings.beginGroup(strGroup);
 
             MyItem *tmpItem = new MyItem(nullptr);
-            tmpItem->name=settings.value("Name", -1).toString();
+            tmpItem->Name=settings.value("Name", -1).toString();
             tmpItem->type=settings.value("Type", -1).toString();
 
-            if(!tmpItem->name.isEmpty())
+            if(!tmpItem->Name.isEmpty())
             {
 
                 this->append_item(ind,tmpItem); //надо не добавлять по одиночке к руту
@@ -513,7 +513,7 @@ int MyModel::load_settings_1(QString ini_file)
      qDebug()<<"============================== ";
     rootItem->m_child_list.clear();
     MyItem *item = new MyItem(nullptr);
-    item->name="System";
+    item->Name="System";
     item->type="System";
     rootItem->m_child_list.append(item);
 
@@ -581,12 +581,12 @@ int MyModel::load_settings_1(QString ini_file)
             child_cnt=0;
             child_cnt=settings.value("Count", -1).toInt();
 
-            qDebug()<<"name   "<< tmpItem->name  ;
+            qDebug()<<"name   "<< tmpItem->Name  ;
             qDebug()<<"type   "<< tmpItem->type  ;
          //   qDebug()<<"cnt   "<< cnt  ;
 
 
-            if(!tmpItem->name.isEmpty())
+            if(!tmpItem->Name.isEmpty())
             {
 
                 this->append_item(ind,tmpItem); //надо не добавлять по одиночке к руту

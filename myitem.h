@@ -28,7 +28,7 @@ public:
 int row() const;
 int childCount() const;
 
-   QString name;
+
    QString type;
 
    static int number;

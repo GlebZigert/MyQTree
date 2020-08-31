@@ -188,6 +188,8 @@ QModelIndex ind_type=model->index(index.row(),1,index.parent());
 QString name=model->data(ind_name, Qt::DisplayRole).toString();
 QString type=model->data(ind_type, Qt::DisplayRole).toString();
 
+       MyItem *item = static_cast<MyItem*>(index.internalPointer());
+
 if(type=="СД")
 {
     qDebug()<<"type = СД";
@@ -195,7 +197,7 @@ if(type=="СД")
     this->ui->label->setPixmap(QPixmap(":/icons/СД.png"));
     this->ui->stackedWidget->setCurrentWidget(this->ui->CD_groupBox);
 
-       MyItem *item = static_cast<MyItem*>(index.internalPointer());
+
 
        qDebug()<<"Num2"<<item->Num2  ;
 this->ui->CD_lineEdit_Num2->setText(QString::number((item->Num2)));
@@ -212,8 +214,9 @@ this->ui->CD_lineEdit_Num2->setText(QString::number((item->Num2)));
       qDebug()<<"UdpUse"<<item->UdpUse  ;
  this->ui->CD_lineEdit_UdpUse->setText(QString::number((item->UdpUse)));
 
+}
 
-
+this->ui->name_item_to_append->setText(item->Name);
 
 
          /*
@@ -228,7 +231,7 @@ this->ui->CD_lineEdit_UdpUse->text()  =item->UdpUse;
 this->ui->CD_lineEdit_UdpAdress->text()    =item->UdpAdress;
 this->ui->CD_lineEdit_UpdPort->text()   =item->UdpPort;
 */
-}
+
 qDebug()<<name;
 qDebug()<<type;
 
@@ -282,10 +285,11 @@ qDebug()<<"Type: "<<type;
           res=0;
 
 
-
+  int Num2;
+  int DK;
     int basalt;
     int connectBlock;
-    int Num2;
+
     bool ok;
 
 
@@ -307,19 +311,32 @@ qDebug()<<"Type: "<<type;
         }
 
 
+        qDebug()<<"CD_lineEdit_DK"<<this->ui->CD_lineEdit_DK->text();
+        DK=this->ui->CD_lineEdit_DK->text().toInt(&ok,10);
+        if(ok)
+        {
+       //     if(basalt!=0)
+      //          basalt=1;
+            qDebug()<<"DK "<<DK;
+
+        }
+        else
+        {
+        qDebug()<<"DK  ERROR";
+        res=0;
+        }
 
 
 
 
 
-      if(type=="СД")
-      {
+
           qDebug()<<"CD_lineEdit_Bazalt"<<this->ui->CD_lineEdit_Bazalt->text();
           basalt=this->ui->CD_lineEdit_Bazalt->text().toInt(&ok,10);
           if(ok)
           {
-              if(basalt!=0)
-                  basalt=1;
+         //     if(basalt!=0)
+        //          basalt=1;
               qDebug()<<"Basalt "<<basalt;
 
           }
@@ -337,8 +354,8 @@ qDebug()<<"Type: "<<type;
           connectBlock=this->ui->CD_lineEdit_ConnectBlock->text().toInt(&ok,10);
           if(ok)
           {
-              if( connectBlock!=0)
-                   connectBlock=1;
+       //       if( connectBlock!=0)
+       //            connectBlock=1;
               qDebug()<<"ConnectBlock "<< connectBlock;
 
           }
@@ -348,7 +365,7 @@ qDebug()<<"Type: "<<type;
           res=0;
           }
 
-    }
+
 
 
       }
@@ -366,6 +383,7 @@ qDebug()<<"Type: "<<type;
           if(type=="СД")
           {
               item->Num2=Num2;
+              item->DK=DK;
               item->Bazalt=basalt;
             item->ConnectBlock=   connectBlock;
           }
