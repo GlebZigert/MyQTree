@@ -71,6 +71,8 @@ private slots:
 
     bool Get_IU_data();
 
+    void on_action_3_triggered();
+
 private:
 
     Ui::MainWindow *ui;

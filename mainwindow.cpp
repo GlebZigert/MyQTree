@@ -702,3 +702,8 @@ bool MainWindow:: Get_IU_data()
             return 1;
 
 }
+
+void MainWindow::on_action_3_triggered()
+{
+    model->save_settings(path);
+}
