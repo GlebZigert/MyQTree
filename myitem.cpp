@@ -1,5 +1,6 @@
 #include "myitem.h"
 #include<QDebug>
+#include<QTextCodec>
 
 
 
@@ -24,31 +25,31 @@ MyItem::MyItem(MyItem *mparent)
    this->m_child_list.clear();
 }
 
-MyItem::MyItem(MyItem *mparent, QString name, QString type)
+MyItem::MyItem(MyItem *mparent, QString name, int type)
 {
     this->Name=name;
-    this->type=type;
+    this->Type=type;
 
-    if(this->type=="СД")
+    if(this->Type==11)
     {
         qDebug()<<"СД!!!!!!!!!!!!! !!!";
      this->viewPXM=QPixmap(":/icons/СД.png");
     }
 
-   if(this->type=="ИУ")
+   if(this->Type==12)
    {
     qDebug()<<"ИУ!!!!!!!!!!!!!!!!!!!";
    this->viewPXM=QPixmap(":/icons/ИУ.png");
    }
 
-   if(this->type=="ТВ-Камера 'Растр'")
-        this->viewPXM=QPixmap(":/icons/камера.png");
+   //if(this->Type=="ТВ-Камера 'Растр'")
+   //     this->viewPXM=QPixmap(":/icons/камера.png");
 
-   if(this->type=="Точка-Гарда")
-   {
-       qDebug()<<"Точка-Гарда!!!!!!!!!!!!!!!!!!!";
-        this->viewPXM=QPixmap(":/icons/Точка-гарда.png");
-}
+  // if(this->type=="Точка-Гарда")
+  // {
+   //    qDebug()<<"Точка-Гарда!!!!!!!!!!!!!!!!!!!";
+ //       this->viewPXM=QPixmap(":/icons/Точка-гарда.png");
+//}
    this->m_parent=mparent;
 
   this->m_child_list.clear();
@@ -75,7 +76,7 @@ void MyItem::show_children(QSettings *settings,QString parrent, int cnt)
 {
     qDebug()<<"---------";
     qDebug()<<this->Name;
-    qDebug()<<this->type;
+    //qDebug()<<this->type;
 
     QString strGroup;
     strGroup.clear();
@@ -87,7 +88,7 @@ void MyItem::show_children(QSettings *settings,QString parrent, int cnt)
     // settings->setIniCodec( "Windows-1251" );
      settings->beginGroup(strGroup);
      settings->setValue("Name",this->Name);
-     settings->setValue("Type",this->type);
+     settings->setValue("Type",this->Type);
 
 qDebug()<<"Count "<<this->m_child_list.count();
     if(this->m_child_list.count()>0)
@@ -116,7 +117,7 @@ void MyItem::show_children_1(QSettings *settings, bool root)
 {
     qDebug()<<"---------";
     qDebug()<<this->Name;
-    qDebug()<<this->type;
+    //qDebug()<<this->type;
     if(!root)
     {
 
@@ -125,12 +126,12 @@ void MyItem::show_children_1(QSettings *settings, bool root)
      strGroup=strGroup.arg(ID::getNextID());
     // MyNumber::number++;
      qDebug()<<"strGroup"<<strGroup;
-     settings->setIniCodec( "Windows-1251" );
+     settings->setIniCodec( QTextCodec::codecForLocale() );
 
      settings->beginGroup(strGroup);
-     settings->setValue("Name",this->Name);
-     settings->setValue("Type",this->type);
-     if(this->type=="СД")
+     settings->setValue("Name", this->Name);
+     settings->setValue("Type",this->Type);
+     if(this->Type==11)
      {
 
          settings->setValue("Num2",this->Num2);
@@ -147,7 +148,7 @@ void MyItem::show_children_1(QSettings *settings, bool root)
         // settings->setValue("UdpAdress",this->UdpAdress);
 
      }
-     if(this->type=="ИУ")
+     if(this->Type==12)
      {
 
          settings->setValue("Num2",this->Num2);

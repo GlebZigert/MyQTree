@@ -189,11 +189,11 @@ QModelIndex ind_type=model->index(index.row(),1,index.parent());
 
 
 QString name=model->data(ind_name, Qt::DisplayRole).toString();
-QString type=model->data(ind_type, Qt::DisplayRole).toString();
+int type=model->data(ind_type, Qt::DisplayRole).toInt();
 
        MyItem *item = static_cast<MyItem*>(index.internalPointer());
 
-if(type=="СД")
+if(type==11)
 {
 
     this->ui->CD_radioButton_DK->setChecked(false);
@@ -242,7 +242,7 @@ this->ui->CD_comboBox_Num2->setCurrentText(QString::number(item->Num2));
       }
 
 }
-if(type=="ИУ")
+if(type==12)
 {
 this->ui->IU_checkBox_UDP->setChecked(false);
     this->ui->IU_comboBox_UDP->setCurrentIndex(1);
@@ -307,7 +307,7 @@ void MainWindow::on_pushButton_clicked()
 
     QString name=ui->name_item_to_append->text();
   //   QString type=ui->type_item_to_append->text();
-     QString type=this->type;
+     int type=this->Type;
 
      qDebug()<<name;
       qDebug()<<type;
@@ -317,17 +317,13 @@ void MainWindow::on_pushButton_clicked()
       qDebug()<<"empty name!!";
       }
 
-      if(type=="")
-      {
-       res=0;
-      qDebug()<<"empty type!!";
-      }
-qDebug()<<"Type: "<<type;
-      if(type!="Группа")
-      if(type!="СД")
 
-      if(type!="ИУ")
-      if(type!="Точка-Гарда")
+qDebug()<<"Type: "<<type;
+
+      if(type!=11)
+
+      if(type!=12)
+
           res=0;
 
 
@@ -483,24 +479,28 @@ void MainWindow::on_action_triggered()
 void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
 {
     qDebug()<<"on_comboBox_currentTextChanged(const QString &arg1)";
-    this->type=arg1;
-    qDebug()<<"type "<<this->type;
+   QString type=this->ui->comboBox->currentText();
+   if(type=="СД")
+    this->Type=11;
+   if(type=="ИУ")
+    this->Type=12;
+
 this->ui->stackedWidget->setCurrentIndex(0);
    //   this->ui->CD_groupBox->setVisible(false);
 
-    if(this->type=="СД")
+    if(this->Type==11)
     {
         this->ui->label->setPixmap(QPixmap(":/icons/СД.png"));
         this->ui->stackedWidget->setCurrentWidget(this->ui->CD_groupBox);
        // this->ui->CD_groupBox->setVisible(true);
     }
 
-   if(this->type=="ИУ")
+   if(this->Type==12)
    {
         this->ui->stackedWidget->setCurrentWidget(this->ui->IU_groupBox);
         this->ui->label->setPixmap(QPixmap(":/icons/ИУ.png"));
 }
-   if(this->type=="ТВ-Камера 'Растр'")
+/*   if(this->type=="ТВ-Камера 'Растр'")
         this->ui->label->setPixmap(QPixmap(":/icons/камера.png"));
 
    if(this->type=="Точка-Гарда")
@@ -508,7 +508,7 @@ this->ui->stackedWidget->setCurrentIndex(0);
   this->ui->stackedWidget ->setCurrentWidget(this->ui->TG_groupBox);
      this->ui->label->setPixmap(QPixmap(":/icons/Точка-гарда.png"));
    }
-
+*/
 
 
   // if(this->type=="Точка/Гарда'")
@@ -537,7 +537,7 @@ void MainWindow::on_pushButton_change_item_clicked()
 
     QString name=ui->name_item_to_append->text();
   //   QString type=ui->type_item_to_append->text();
-     QString type=this->type;
+     int type=this->Type;
 
      qDebug()<<name;
       qDebug()<<type;
@@ -547,17 +547,15 @@ void MainWindow::on_pushButton_change_item_clicked()
       qDebug()<<"empty name!!";
       }
 
-      if(type=="")
+      if(type==0)
       {
        res=0;
       qDebug()<<"empty type!!";
       }
 qDebug()<<"Type: "<<type;
-      if(type!="Группа")
-      if(type!="СД")
+      if(type!=11)
+      if(type!=12)
 
-      if(type!="ИУ")
-      if(type!="Точка-Гарда")
           res=0;
 
 
@@ -599,7 +597,7 @@ qDebug()<<"Type: "<<type;
 
 bool MainWindow::change_item(MyItem *item)
 {
-    if(type=="СД")
+    if(Type==11)
     {
         item->Num2=Num2;
         item->DK=DK;
@@ -615,7 +613,7 @@ bool MainWindow::change_item(MyItem *item)
 
     }
 
-    if(type=="ИУ")
+    if(Type==12)
     {
         item->Num2=Num2;
         item->UdpUse=UdpUse;
@@ -629,11 +627,11 @@ bool MainWindow::change_item(MyItem *item)
 
 bool MainWindow::Get_data()
 {
-    if(type=="СД")
+    if(Type==11)
     {
      return this->Get_CD_data();
       }
-    if(type=="ИУ")
+    if(Type==12)
         return this->Get_IU_data();
 }
 

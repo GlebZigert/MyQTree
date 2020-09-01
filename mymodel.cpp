@@ -1,6 +1,7 @@
 #include "mymodel.h"
 #include <QDebug>
 #include <QStack>
+#include<QTextCodec>
 //#include <QStringList>
 
 MyModel::MyModel(QObject *parent)
@@ -10,12 +11,12 @@ MyModel::MyModel(QObject *parent)
     this->rootItem=new MyItem(nullptr);
    // rootItem->ID=1;
     rootItem->Name="Дерево устройств";
-    rootItem->type="ROOT_TYPE";
+    rootItem->Type=800;
 
     MyItem *item = new MyItem(nullptr);
    // qDebug()<<"id "<<item->ID;
     item->Name="System";
-    item->type="System";
+    item->Type=800;
     rootItem->m_child_list.append(item);
 
     item->m_parent=rootItem;
@@ -158,7 +159,7 @@ if (role == Qt::DisplayRole)
 
         case 1:
   //       qDebug()<<item->type;
-        return item->type;
+        return item->Type;
         break;
 
     }
@@ -188,7 +189,7 @@ QVariant MyModel::headerData(int section, Qt::Orientation orientation, int role)
 
         case 1:
   //       qDebug()<<item->type;
-        return rootItem->type;
+        return rootItem->Type;
         break;
 
     }
@@ -433,7 +434,7 @@ int MyModel::load_settings(QString ini_file)
     rootItem->m_child_list.clear();
     MyItem *item = new MyItem(nullptr);
     item->Name="System";
-    item->type="System";
+    item->Type=800;
     rootItem->m_child_list.append(item);
 
     item->m_parent=rootItem;
@@ -480,7 +481,7 @@ int MyModel::load_settings(QString ini_file)
 
             MyItem *tmpItem = new MyItem(nullptr);
             tmpItem->Name=settings.value("Name", -1).toString();
-            tmpItem->type=settings.value("Type", -1).toString();
+            tmpItem->Type=settings.value("Type", -1).toInt();
 
             if(!tmpItem->Name.isEmpty())
             {
@@ -514,7 +515,7 @@ int MyModel::load_settings_1(QString ini_file)
     rootItem->m_child_list.clear();
     MyItem *item = new MyItem(nullptr);
     item->Name="System";
-    item->type="System";
+    item->Type=800;
     rootItem->m_child_list.append(item);
 
     item->m_parent=rootItem;
@@ -522,6 +523,8 @@ int MyModel::load_settings_1(QString ini_file)
 
    // QSettings settings("/home/gleb/MyTree/rifx.ini",QSettings::IniFormat);
     QSettings settings(ini_file,QSettings::IniFormat);
+
+     settings.setIniCodec(QTextCodec::codecForLocale() );
     settings.beginGroup("TREE");
     int count=settings.value("Count",-1).toInt();
     qDebug()<<"device count: "<<count;
@@ -532,7 +535,7 @@ int MyModel::load_settings_1(QString ini_file)
 
 
 
-    settings.setIniCodec( "Windows-1251" );
+
 
 
     QModelIndex ind=this->index(0,0);
@@ -574,19 +577,19 @@ int MyModel::load_settings_1(QString ini_file)
 
 
             QString name=settings.value("Name", -1).toString();
-            QString type=settings.value("Type", -1).toString();
+            int Type=settings.value("Type", -1).toInt();
 
 
 
-            MyItem *tmpItem = new MyItem(nullptr,name,type);
+            MyItem *tmpItem = new MyItem(nullptr,name,Type);
 
             child_cnt=0;
             child_cnt=settings.value("Count", -1).toInt();
 
             qDebug()<<"name   "<< tmpItem->Name  ;
-            qDebug()<<"type   "<< tmpItem->type  ;
+        //    qDebug()<<"type   "<< tmpItem->type  ;
 
-            if(type=="СД")
+            if(Type==11)
             {
                 tmpItem->Num2=settings.value("Num2", -1).toInt();
                 tmpItem->DK=settings.value("DK", -1).toInt();
@@ -601,7 +604,7 @@ int MyModel::load_settings_1(QString ini_file)
 
             }
 
-            if(type=="ИУ")
+            if(Type==12)
             {
                 tmpItem->Num2=settings.value("Num2", -1).toInt();
 
@@ -755,12 +758,7 @@ int MyModel::save_settings(QString path)
 
    QSettings settings(path,QSettings::IniFormat);
 
-   settings.clear();
-   settings.beginGroup("TREE");
- //  qDebug()<<"TREE";
-//   qDebug()<<"Count"<<this->rowCount(ind);
-   settings.setValue("Count",this->rowCount(ind));
-   settings.endGroup();
+
 
   // QModelIndex root=this.parent(ind);
 
@@ -768,12 +766,19 @@ int MyModel::save_settings(QString path)
 
 
 
+
+
    if(item->childCount()>0)
+
    item->show_children_1(&settings,true);
+
+
 
    settings.beginGroup("TREE");
    settings.setValue("Count",ID::getNextID()-1);
+
    settings.endGroup();
+
 
    /*
    qDebug()<<this->rowCount(ind);

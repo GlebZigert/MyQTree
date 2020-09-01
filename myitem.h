@@ -16,7 +16,7 @@ class MyItem
 
 public:
     MyItem(MyItem *mparent);
-     MyItem(MyItem *mparent,QString name, QString type);
+     MyItem(MyItem *mparent,QString name, int Type);
     ~MyItem();
 
 
@@ -29,7 +29,7 @@ int row() const;
 int childCount() const;
 
 
-   QString type;
+
 
    static int number;
 

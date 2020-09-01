@@ -77,7 +77,7 @@ private:
 
     Ui::MainWindow *ui;
 
-    QString type;
+    int Type;
     QString name;
 
 
