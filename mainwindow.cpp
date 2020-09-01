@@ -18,11 +18,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-    this->ui->comboBox->addItem("Группа");
+    this->ui->comboBox->addItem("");
     this->ui->comboBox->addItem("СД");
     this->ui->comboBox->addItem("ИУ");
 //    this->ui->comboBox->addItem("ТВ-Камера 'Растр'");
-     this->ui->comboBox->addItem("Точка-Гарда");
+//     this->ui->comboBox->addItem("Точка-Гарда");
     //Точка/Гарда
 
     QVBoxLayout *CD_box_Layout=new QVBoxLayout();
@@ -428,6 +428,7 @@ void MainWindow::on_treeView_entered(const QModelIndex &index)
 
 void MainWindow::on_pushButton_4_clicked()
 {
+    qDebug()<<"ini file path: "<<path;
 model->save_settings(path);
 
 }
@@ -445,7 +446,7 @@ void MainWindow::on_action_2_triggered()
 void MainWindow::on_action_triggered()
 {
    this->path=QFileDialog::getSaveFileName(this, "save file","","*.ini");
-   path.append(".ini");
+
    QFile file(path);
    file.open(QIODevice::WriteOnly | QIODevice::Text);
      QTextStream out(&file);
