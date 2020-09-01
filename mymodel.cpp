@@ -600,6 +600,19 @@ int MyModel::load_settings_1(QString ini_file)
                 }
 
             }
+
+            if(type=="ИУ")
+            {
+                tmpItem->Num2=settings.value("Num2", -1).toInt();
+
+                tmpItem->UdpUse=settings.value("UdpUse", -1).toInt();
+                if(tmpItem->UdpUse>0)
+                {
+                    tmpItem->UdpAdress=settings.value("UdpAdress", -1).toString();
+                    tmpItem->UdpPort=settings.value("UdpPort", -1).toInt();
+                }
+
+            }
          //   qDebug()<<"cnt   "<< cnt  ;
 
 

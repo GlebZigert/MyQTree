@@ -175,7 +175,7 @@
       <widget class="QLineEdit" name="IU_lineEdit_UdpAdress">
        <property name="geometry">
         <rect>
-         <x>200</x>
+         <x>190</x>
          <y>90</y>
          <width>151</width>
          <height>27</height>
@@ -185,7 +185,7 @@
       <widget class="QLineEdit" name="IU_lineEdit_UpdPort">
        <property name="geometry">
         <rect>
-         <x>200</x>
+         <x>190</x>
          <y>120</y>
          <width>151</width>
          <height>27</height>

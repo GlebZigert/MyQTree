@@ -66,8 +66,9 @@ IU_box_Layout->addWidget(this->ui->IU_label_4    );
 
 QVBoxLayout *IU_box_Layout_1=new QVBoxLayout();
 IU_box_Layout_1->addWidget((this->ui->IU_comboBox_UDP));
-IU_box_Layout_1->addWidget(this->ui->IU_lineEdit_UdpAdress    );
 IU_box_Layout_1->addWidget(this->ui->IU_checkBox_UDP   );
+IU_box_Layout_1->addWidget(this->ui->IU_lineEdit_UdpAdress    );
+
 IU_box_Layout_1->addWidget(this->ui->IU_lineEdit_UpdPort    );
 
 
@@ -243,9 +244,24 @@ this->ui->CD_comboBox_Num2->setCurrentText(QString::number(item->Num2));
 }
 if(type=="ИУ")
 {
+this->ui->IU_checkBox_UDP->setChecked(false);
+    this->ui->IU_comboBox_UDP->setCurrentIndex(1);
+    this->ui->IU_lineEdit_UdpAdress->setText("");
+    this->ui->IU_lineEdit_UpdPort->setText("");
 
+    this->ui->stackedWidget->setCurrentWidget(this->ui->IU_groupBox);
+
+
+    this->ui->IU_comboBox_UDP->setCurrentText(QString::number(item->Num2));
+    this->ui->IU_checkBox_UDP->setChecked(item->UdpUse);
+    if(item->UdpUse>0)
+    {
+    this->ui->IU_lineEdit_UdpAdress->setText(item->UdpAdress);
+    this->ui->IU_lineEdit_UpdPort->setText(QString::number(item->UdpPort));
+
+    }
 }
-
+if(item->Name!="System")
 this->ui->name_item_to_append->setText(item->Name);
 
 
@@ -600,7 +616,13 @@ bool MainWindow::change_item(MyItem *item)
 
     if(type=="ИУ")
     {
-
+        item->Num2=Num2;
+        item->UdpUse=UdpUse;
+        if(UdpUse>0)
+        {
+           item->UdpPort=UdpPort;
+           item->UdpAdress=UdpAdress;
+        }
     }
 }
 
@@ -660,7 +682,22 @@ bool MainWindow:: Get_IU_data()
             if(UdpUse>0)
             {
        this->UdpAdress=this->ui->IU_lineEdit_UdpAdress->text();
-       this->UdpPort=this->ui->IU_lineEdit_UpdPort->text().toInt();
+                if(UdpAdress=="")
+                    return 0;
+       this->UdpPort=this->ui->IU_lineEdit_UpdPort->text().toInt(&ok,10);
+                if(ok)
+                {
+             //       if( connectBlock!=0)
+             //            connectBlock=1;
+                    qDebug()<<"UpdPort "<< UdpPort;
+
+                }
+                else
+                {
+                qDebug()<<"UpdPort  ERROR";
+                 return 0;
+                }
     }
+            return 1;
 
 }
