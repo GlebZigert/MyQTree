@@ -576,6 +576,8 @@ int MyModel::load_settings_1(QString ini_file)
             QString name=settings.value("Name", -1).toString();
             QString type=settings.value("Type", -1).toString();
 
+
+
             MyItem *tmpItem = new MyItem(nullptr,name,type);
 
             child_cnt=0;
@@ -583,6 +585,21 @@ int MyModel::load_settings_1(QString ini_file)
 
             qDebug()<<"name   "<< tmpItem->Name  ;
             qDebug()<<"type   "<< tmpItem->type  ;
+
+            if(type=="СД")
+            {
+                tmpItem->Num2=settings.value("Num2", -1).toInt();
+                tmpItem->DK=settings.value("DK", -1).toInt();
+                tmpItem->Bazalt=settings.value("Bazalt", -1).toInt();
+                tmpItem->ConnectBlock=settings.value("ConnectBlock", -1).toInt();
+                tmpItem->UdpUse=settings.value("UdpUse", -1).toInt();
+                if(tmpItem->UdpUse>0)
+                {
+                    tmpItem->UdpAdress=settings.value("UdpAdress", -1).toString();
+                    tmpItem->UdpPort=settings.value("UdpPort", -1).toInt();
+                }
+
+            }
          //   qDebug()<<"cnt   "<< cnt  ;
 
 

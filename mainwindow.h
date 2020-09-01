@@ -59,11 +59,44 @@ private slots:
 
     void on_comboBox_currentTextChanged(const QString &arg1);
 
+    void on_pushButton_change_item_clicked();
+
+
+
+   bool change_item(MyItem *item);
+
+
+    bool Get_data();
+    bool Get_CD_data();
+
+    bool Get_IU_data();
+
 private:
+
     Ui::MainWindow *ui;
 
     QString type;
     QString name;
+
+
+    int Num2;
+    bool DK;
+    bool basalt;
+    bool connectBlock;
+    bool UdpUse;
+      QString UdpAdress;
+      int UdpPort;
+
+      bool ok;
+
+   bool  CD_look_on_input_data();
+
+
+
+
+
+
+
 
 public slots:
 

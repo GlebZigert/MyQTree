@@ -31,7 +31,7 @@ MyItem::MyItem(MyItem *mparent, QString name, QString type)
 
     if(this->type=="СД")
     {
-        qDebug()<<"СД!!!!!!!!!!!!!!!!";
+        qDebug()<<"СД!!!!!!!!!!!!! !!!";
      this->viewPXM=QPixmap(":/icons/СД.png");
     }
 
@@ -132,11 +132,18 @@ void MyItem::show_children_1(QSettings *settings, bool root)
      settings->setValue("Type",this->type);
      if(this->type=="СД")
      {
+
          settings->setValue("Num2",this->Num2);
          settings->setValue("DK",this->DK);
          settings->setValue("Bazalt",this->Bazalt);
          settings->setValue("ConnectBlock",this->ConnectBlock);
-     //    settings->setValue("UdpUse",this->UdpUse);
+         settings->setValue("UdpUse",this->UdpUse);
+         if(this->UdpUse>0)
+         {
+             settings->setValue("UdpAdress",this->UdpAdress);
+             settings->setValue("UdpPort",this->UdpPort);
+
+         }
         // settings->setValue("UdpAdress",this->UdpAdress);
 
      }

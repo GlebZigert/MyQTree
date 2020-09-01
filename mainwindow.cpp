@@ -38,13 +38,13 @@ CD_box_Layout->addWidget(this->ui->CD_label_5    );
 
  QVBoxLayout *CD_box_Layout_1=new QVBoxLayout();
 
- CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_Num2    );
- CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_DK    );
+ CD_box_Layout_1->addWidget(this->ui->CD_comboBox_Num2);
+ CD_box_Layout_1->addWidget(this->ui->CD_radioButton_DK    );
 
 
-CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_Bazalt    );
-CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_ConnectBlock    );
-CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_UdpUse    );
+CD_box_Layout_1->addWidget(this->ui->CD_radioButton_Bazalt    );
+CD_box_Layout_1->addWidget(this->ui->CD_radioButton_ConnectBlock    );
+CD_box_Layout_1->addWidget(this->ui->CD_radioButton_UDP    );
 
 CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_UdpAdress    );
 CD_box_Layout_1->addWidget(this->ui->CD_lineEdit_UpdPort    );
@@ -65,9 +65,9 @@ IU_box_Layout->addWidget(this->ui->IU_label_4    );
 
 
 QVBoxLayout *IU_box_Layout_1=new QVBoxLayout();
-IU_box_Layout_1->addWidget(this->ui->IU_lineEdit_Num2    );
+IU_box_Layout_1->addWidget((this->ui->IU_comboBox_UDP));
 IU_box_Layout_1->addWidget(this->ui->IU_lineEdit_UdpAdress    );
-IU_box_Layout_1->addWidget(this->ui->IU_lineEdit_UdpUse    );
+IU_box_Layout_1->addWidget(this->ui->IU_checkBox_UDP   );
 IU_box_Layout_1->addWidget(this->ui->IU_lineEdit_UpdPort    );
 
 
@@ -180,6 +180,8 @@ MainWindow::~MainWindow()
 void MainWindow::on_treeView_clicked(const QModelIndex &index)
 {
     current_index=&index;
+
+
 QModelIndex ind_name=model->index(index.row(),0,index.parent());
 QModelIndex ind_type=model->index(index.row(),1,index.parent());
 
@@ -192,6 +194,19 @@ QString type=model->data(ind_type, Qt::DisplayRole).toString();
 
 if(type=="СД")
 {
+
+    this->ui->CD_radioButton_DK->setChecked(false);
+
+
+    this->ui->CD_radioButton_Bazalt->setChecked(false);
+    this->ui->CD_radioButton_ConnectBlock->setChecked(false);
+    this->ui->CD_radioButton_UDP->setChecked(false);
+
+    this->ui->CD_lineEdit_UdpAdress->setText("");
+    this->ui->CD_lineEdit_UpdPort->setText("");
+
+
+
     qDebug()<<"type = СД";
  this->ui->comboBox->setCurrentIndex(1);
     this->ui->label->setPixmap(QPixmap(":/icons/СД.png"));
@@ -200,19 +215,34 @@ if(type=="СД")
 
 
        qDebug()<<"Num2"<<item->Num2  ;
-this->ui->CD_lineEdit_Num2->setText(QString::number((item->Num2)));
+this->ui->CD_comboBox_Num2->setCurrentText(QString::number(item->Num2));
 
          qDebug()<<"DK"<<item->DK  ;
- this->ui->CD_lineEdit_DK->setText(QString::number((item->DK)));
+ this->ui->CD_radioButton_DK->setChecked(item->DK);
 
   qDebug()<<"Bazalt"<<item->Bazalt  ;
- this->ui->CD_lineEdit_Bazalt->setText(QString::number((item->Bazalt)));
+ this->ui->CD_radioButton_Bazalt->setChecked(item->Bazalt);
 
     qDebug()<<"ConnectBlock"<<item->ConnectBlock  ;
- this->ui->CD_lineEdit_ConnectBlock->setText(QString::number((item->ConnectBlock)));
+ this->ui->CD_radioButton_ConnectBlock->setChecked(item->ConnectBlock);
 
       qDebug()<<"UdpUse"<<item->UdpUse  ;
- this->ui->CD_lineEdit_UdpUse->setText(QString::number((item->UdpUse)));
+ this->ui->CD_radioButton_UDP->setChecked(item->UdpUse);
+
+
+      if(item->UdpUse>0)
+      {
+          qDebug()<<"UdpAdress"<<item->UdpAdress  ;
+     this->ui->CD_lineEdit_UdpAdress->setText(item->UdpAdress);
+
+          qDebug()<<"UdpPort"<<item->UdpPort  ;
+     this->ui->CD_lineEdit_UpdPort->setText(QString::number(item->UdpPort));
+
+      }
+
+}
+if(type=="ИУ")
+{
 
 }
 
@@ -285,93 +315,11 @@ qDebug()<<"Type: "<<type;
           res=0;
 
 
-  int Num2;
-  int DK;
-    int basalt;
-    int connectBlock;
-
-    bool ok;
-
-
-    if(type=="СД")
-    {
-        qDebug()<<"CD_lineEdit_Num2"<<this->ui->CD_lineEdit_Num2->text();
-        Num2=this->ui->CD_lineEdit_Num2->text().toInt(&ok,10);
-        if(ok)
-        {
-     //       if(Num2!=0)
-     //           Num2=0;
-            qDebug()<<"Num2"<<Num2;
-
-        }
-        else
-        {
-        qDebug()<<"Num2  ERROR";
-        res=0;
-        }
-
-
-        qDebug()<<"CD_lineEdit_DK"<<this->ui->CD_lineEdit_DK->text();
-        DK=this->ui->CD_lineEdit_DK->text().toInt(&ok,10);
-        if(ok)
-        {
-       //     if(basalt!=0)
-      //          basalt=1;
-            qDebug()<<"DK "<<DK;
-
-        }
-        else
-        {
-        qDebug()<<"DK  ERROR";
-        res=0;
-        }
 
 
 
 
-
-
-          qDebug()<<"CD_lineEdit_Bazalt"<<this->ui->CD_lineEdit_Bazalt->text();
-          basalt=this->ui->CD_lineEdit_Bazalt->text().toInt(&ok,10);
-          if(ok)
-          {
-         //     if(basalt!=0)
-        //          basalt=1;
-              qDebug()<<"Basalt "<<basalt;
-
-          }
-          else
-          {
-          qDebug()<<"Basalt  ERROR";
-          res=0;
-          }
-
-
-
-
-
-
-          connectBlock=this->ui->CD_lineEdit_ConnectBlock->text().toInt(&ok,10);
-          if(ok)
-          {
-       //       if( connectBlock!=0)
-       //            connectBlock=1;
-              qDebug()<<"ConnectBlock "<< connectBlock;
-
-          }
-          else
-          {
-          qDebug()<<" connectBlock  ERROR";
-          res=0;
-          }
-
-
-
-
-      }
-
-
-
+res=this->Get_data();
 
 
 
@@ -380,16 +328,12 @@ qDebug()<<"Type: "<<type;
       {
           MyItem *item=new MyItem(nullptr,name,type);
 
-          if(type=="СД")
-          {
-              item->Num2=Num2;
-              item->DK=DK;
-              item->Bazalt=basalt;
-            item->ConnectBlock=   connectBlock;
-          }
+
 
 
           model->append_item(model->index(current.row(),0,current.parent()),item);
+
+             change_item( item);
 
 
 
@@ -554,5 +498,169 @@ this->ui->stackedWidget->setCurrentIndex(0);
   //      this->viewPXM=QPixmap(":/icons/Точка-гарда.png");
 
 
+
+}
+
+void MainWindow::on_pushButton_change_item_clicked()
+{
+    qDebug()<<"treePosition(); "<<this->ui->treeView->treePosition();
+    int res=1;
+
+
+    QModelIndex current=this->ui->treeView->currentIndex();
+
+
+
+    if (current_index==nullptr)
+    {
+        res=0;
+    qDebug()<<"no current index!!!";
+    }
+
+
+    QString name=ui->name_item_to_append->text();
+  //   QString type=ui->type_item_to_append->text();
+     QString type=this->type;
+
+     qDebug()<<name;
+      qDebug()<<type;
+      if(name=="")
+      {
+          res=0;
+      qDebug()<<"empty name!!";
+      }
+
+      if(type=="")
+      {
+       res=0;
+      qDebug()<<"empty type!!";
+      }
+qDebug()<<"Type: "<<type;
+      if(type!="Группа")
+      if(type!="СД")
+
+      if(type!="ИУ")
+      if(type!="Точка-Гарда")
+          res=0;
+
+
+   res=this->Get_data();
+
+
+
+
+
+
+
+
+      qDebug()<<"res "<<res;
+      if(1==res)
+      {
+          MyItem *item = static_cast<MyItem*>(current.internalPointer());
+
+
+
+         change_item( item);
+
+       //   model->append_item(model->index(current.row(),0,current.parent()),item);
+
+
+
+
+
+
+
+
+
+
+         this->ui->treeView->setCurrentIndex(model->index(current.row(),0,current.parent()));
+      }
+
+
+
+}
+
+bool MainWindow::change_item(MyItem *item)
+{
+    if(type=="СД")
+    {
+        item->Num2=Num2;
+        item->DK=DK;
+        item->Bazalt=basalt;
+      item->ConnectBlock=   connectBlock;
+      item->UdpUse=UdpUse;
+      if(UdpUse>0)
+      {
+         item->UdpPort=UdpPort;
+         item->UdpAdress=UdpAdress;
+      }
+
+
+    }
+
+    if(type=="ИУ")
+    {
+
+    }
+}
+
+bool MainWindow::Get_data()
+{
+    if(type=="СД")
+    {
+     return this->Get_CD_data();
+      }
+    if(type=="ИУ")
+        return this->Get_IU_data();
+}
+
+
+
+
+
+bool MainWindow::Get_CD_data()
+{
+    Num2=this->ui->CD_comboBox_Num2->currentText().toInt();
+
+
+    DK=this->ui->CD_radioButton_DK->isChecked();
+    basalt=this->ui->CD_radioButton_Bazalt->isChecked();
+    connectBlock=this->ui->CD_radioButton_ConnectBlock->isChecked();
+    UdpUse=this->ui->CD_radioButton_UDP->isChecked();
+
+      if(UdpUse>0)
+      {
+          UdpAdress=this->ui->CD_lineEdit_UdpAdress->text();
+         qDebug()<<"UdpAdress "<< UdpAdress;
+          if(UdpAdress=="")
+              return 0;
+          UdpPort=this->ui->CD_lineEdit_UpdPort->text().toInt(&ok,10);
+          if(ok)
+          {
+       //       if( connectBlock!=0)
+       //            connectBlock=1;
+              qDebug()<<"UpdPort "<< UdpPort;
+
+          }
+          else
+          {
+          qDebug()<<"UpdPort  ERROR";
+           return 0;
+          }
+
+
+      }
+      return 1;
+}
+
+bool MainWindow:: Get_IU_data()
+{
+    this->Num2=this->ui->IU_comboBox_UDP->currentText().toInt();
+    this->UdpUse=this->ui->IU_checkBox_UDP->isChecked();
+            if(UdpUse>0)
+            {
+       this->UdpAdress=this->ui->IU_lineEdit_UdpAdress->text();
+       this->UdpPort=this->ui->IU_lineEdit_UpdPort->text().toInt();
+    }
 
 }
