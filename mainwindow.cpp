@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->ui->comboBox->addItem("СД");
     this->ui->comboBox->addItem("ИУ");
 //    this->ui->comboBox->addItem("ТВ-Камера 'Растр'");
-//     this->ui->comboBox->addItem("Точка-Гарда");
+     this->ui->comboBox->addItem("Точка/Гарда");
     //Точка/Гарда
 
     QVBoxLayout *CD_box_Layout=new QVBoxLayout();
@@ -79,6 +79,13 @@ IU_H_box_layout->addLayout(IU_box_Layout_1);
 
 this->ui->IU_groupBox->setLayout(IU_H_box_layout);
 
+
+for(int i=0;i<99;i++)
+{
+    this->ui->TG_combobox_adress->addItem(QString::number(i));
+}
+
+
 QVBoxLayout *TG_box_Layout=new QVBoxLayout();
 TG_box_Layout->addWidget(this->ui->TG_label);
 TG_box_Layout->addWidget(this->ui ->TG_label_2  );
@@ -88,12 +95,12 @@ TG_box_Layout->addWidget(this->ui->TG_label_5    );
 TG_box_Layout->addWidget(this->ui->TG_label_6    );
 
 QVBoxLayout *TG_box_Layout_1=new QVBoxLayout();
-TG_box_Layout_1->addWidget(this->ui->TG_lineEdit  );
-TG_box_Layout_1->addWidget(this->ui->TG_lineEdit_2    );
-TG_box_Layout_1->addWidget(this->ui->TG_lineEdit_3    );
-TG_box_Layout_1->addWidget(this->ui->TG_lineEdit_4    );
-TG_box_Layout_1->addWidget(this->ui->TG_lineEdit_5    );
-TG_box_Layout_1->addWidget(this->ui->TG_lineEdit_6  );
+TG_box_Layout_1->addWidget(this->ui->TG_combobox_adress  );
+TG_box_Layout_1->addWidget(this->ui->TG_combobox_number  );
+TG_box_Layout_1->addWidget(this->ui->TG_checkBox_DK  );
+TG_box_Layout_1->addWidget(this->ui->TG_checkBox_UDP  );
+TG_box_Layout_1->addWidget(this->ui->TG_lineEdit_ipaddr  );
+TG_box_Layout_1->addWidget(this->ui->TG_lineEdit_ipport  );
 
 QHBoxLayout *TG_H_box_layout=new QHBoxLayout();
 
@@ -101,6 +108,11 @@ TG_H_box_layout->addLayout(TG_box_Layout);
 TG_H_box_layout->addLayout(TG_box_Layout_1);
 
 this->ui->TG_groupBox->setLayout(TG_H_box_layout);
+
+
+
+
+
 
 
 qDebug()<<"stack widget count  "<<this->ui->stackedWidget->count();
@@ -261,6 +273,21 @@ this->ui->IU_checkBox_UDP->setChecked(false);
 
     }
 }
+
+if(type==type_TG)
+{
+    this->ui->TG_combobox_adress->setCurrentIndex(1);
+            this->ui->TG_combobox_number->setCurrentIndex(1);
+            this->ui->TG_checkBox_DK->setChecked(false);
+            this->ui->TG_checkBox_UDP->setChecked(false);
+            this->ui->TG_lineEdit_ipaddr->setText("");
+            this->ui->TG_lineEdit_ipport->setText("");
+
+
+  this->ui->stackedWidget->setCurrentWidget(this->ui->TG_groupBox);
+
+
+}
 if(item->Name!="System")
 this->ui->name_item_to_append->setText(item->Name);
 
@@ -320,10 +347,11 @@ void MainWindow::on_pushButton_clicked()
 
 qDebug()<<"Type: "<<type;
 
-      if(type!=11)
+      if(type!=type_CD)
 
-      if(type!=12)
+      if(type!=type_IU)
 
+      if(type!=type_TG)
           res=0;
 
 
@@ -484,6 +512,8 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
     this->Type=type_CD;
    if(type=="ИУ")
     this->Type=type_IU;
+   if(type=="Точка/Гарда")
+    this->Type=type_TG;
 
 this->ui->stackedWidget->setCurrentIndex(0);
    //   this->ui->CD_groupBox->setVisible(false);
@@ -500,6 +530,13 @@ this->ui->stackedWidget->setCurrentIndex(0);
         this->ui->stackedWidget->setCurrentWidget(this->ui->IU_groupBox);
         this->ui->label->setPixmap(QPixmap(":/icons/ИУ.png"));
 }
+
+   if(this->Type==type_TG)
+   {
+  this->ui->stackedWidget ->setCurrentWidget(this->ui->TG_groupBox);
+     this->ui->label->setPixmap(QPixmap(":/icons/Точка-гарда.png"));
+   }
+
 /*   if(this->type=="ТВ-Камера 'Растр'")
         this->ui->label->setPixmap(QPixmap(":/icons/камера.png"));
 

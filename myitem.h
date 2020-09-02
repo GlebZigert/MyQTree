@@ -11,7 +11,8 @@
 enum TypeDevice
       {
         type_CD =  (quint8)11,
-        type_IU =(quint8)12
+        type_IU =(quint8)12,
+       type_TG =(quint8)10
       };
 
 class MyItem
