@@ -67,9 +67,12 @@ private slots:
 
 
     bool Get_data();
+
     bool Get_CD_data();
 
     bool Get_IU_data();
+
+    bool Get_TG_data();
 
     void on_action_3_triggered();
 
@@ -80,7 +83,7 @@ private:
     int Type;
     QString name;
 
-
+    int Num1;
     int Num2;
     bool DK;
     bool basalt;

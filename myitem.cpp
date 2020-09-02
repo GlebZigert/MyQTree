@@ -45,11 +45,11 @@ MyItem::MyItem(MyItem *mparent, QString name, int type)
    //if(this->Type=="ТВ-Камера 'Растр'")
    //     this->viewPXM=QPixmap(":/icons/камера.png");
 
-  // if(this->type=="Точка-Гарда")
-  // {
-   //    qDebug()<<"Точка-Гарда!!!!!!!!!!!!!!!!!!!";
- //       this->viewPXM=QPixmap(":/icons/Точка-гарда.png");
-//}
+ if(this->Type==type_TG)
+{
+   qDebug()<<"Точка-Гарда!!!!!!!!!!!!!!!!!!!";
+     this->viewPXM=QPixmap(":/icons/Точка-гарда.png");
+}
    this->m_parent=mparent;
 
   this->m_child_list.clear();

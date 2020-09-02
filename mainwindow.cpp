@@ -286,6 +286,13 @@ if(type==type_TG)
 
   this->ui->stackedWidget->setCurrentWidget(this->ui->TG_groupBox);
 
+    this->ui->TG_combobox_adress->setCurrentText(QString::number(item->Num1));
+            this->ui->TG_combobox_number->setCurrentText(QString::number(item->Num2));
+            this->ui->TG_checkBox_DK->setChecked(item->DK);
+            this->ui->TG_checkBox_UDP->setChecked(item->UdpUse);
+            this->ui->TG_lineEdit_ipaddr->setText(item->UdpAdress);
+            this->ui->TG_lineEdit_ipport->setText(QString::number(item->UdpPort));
+
 
 }
 if(item->Name!="System")
@@ -660,6 +667,21 @@ bool MainWindow::change_item(MyItem *item)
            item->UdpAdress=UdpAdress;
         }
     }
+
+    if(Type==type_TG)
+    {
+        item->Num1=Num1;
+        item->DK=DK;
+
+        item->Num2=Num2;
+        item->UdpUse=UdpUse;
+        if(UdpUse>0)
+        {
+           item->UdpPort=UdpPort;
+           item->UdpAdress=UdpAdress;
+        }
+    }
+
 }
 
 bool MainWindow::Get_data()
@@ -670,6 +692,10 @@ bool MainWindow::Get_data()
       }
     if(Type==type_IU)
         return this->Get_IU_data();
+
+    if(Type==type_TG)
+        return this->Get_TG_data();
+
 }
 
 
@@ -736,6 +762,34 @@ bool MainWindow:: Get_IU_data()
     }
             return 1;
 
+}
+
+bool MainWindow::Get_TG_data()
+{
+    this->Num1=this->ui->TG_combobox_adress->currentText().toInt();
+    this->Num2=this->ui->TG_combobox_number->currentText().toInt();
+    this->DK=this->ui->TG_checkBox_DK->isChecked();
+    this->UdpUse=this->ui->TG_checkBox_UDP->isChecked();
+            if(UdpUse>0)
+   {
+       this->UdpAdress=this->ui->TG_lineEdit_ipaddr->text();
+                if(UdpAdress=="")
+                    return 0;
+       this->UdpPort=this->ui->TG_lineEdit_ipport->text().toInt(&ok,10);
+                if(ok)
+                {
+             //       if( connectBlock!=0)
+             //            connectBlock=1;
+                    qDebug()<<"UpdPort "<< UdpPort;
+
+                }
+                else
+                {
+                qDebug()<<"UpdPort  ERROR";
+                 return 0;
+                }
+   }
+            return 1;
 }
 
 void MainWindow::on_action_3_triggered()
