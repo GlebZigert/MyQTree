@@ -589,7 +589,7 @@ int MyModel::load_settings_1(QString ini_file)
             qDebug()<<"name   "<< tmpItem->Name  ;
         //    qDebug()<<"type   "<< tmpItem->type  ;
 
-            if(Type==11)
+            if(Type==type_CD)
             {
                 tmpItem->Num2=settings.value("Num2", -1).toInt();
                 tmpItem->DK=settings.value("DK", -1).toInt();
@@ -604,7 +604,7 @@ int MyModel::load_settings_1(QString ini_file)
 
             }
 
-            if(Type==12)
+            if(Type==type_IU)
             {
                 tmpItem->Num2=settings.value("Num2", -1).toInt();
 

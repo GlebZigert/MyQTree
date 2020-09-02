@@ -193,7 +193,7 @@ int type=model->data(ind_type, Qt::DisplayRole).toInt();
 
        MyItem *item = static_cast<MyItem*>(index.internalPointer());
 
-if(type==11)
+if(type==type_CD)
 {
 
     this->ui->CD_radioButton_DK->setChecked(false);
@@ -242,7 +242,7 @@ this->ui->CD_comboBox_Num2->setCurrentText(QString::number(item->Num2));
       }
 
 }
-if(type==12)
+if(type==type_IU)
 {
 this->ui->IU_checkBox_UDP->setChecked(false);
     this->ui->IU_comboBox_UDP->setCurrentIndex(1);
@@ -481,21 +481,21 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
     qDebug()<<"on_comboBox_currentTextChanged(const QString &arg1)";
    QString type=this->ui->comboBox->currentText();
    if(type=="СД")
-    this->Type=11;
+    this->Type=type_CD;
    if(type=="ИУ")
-    this->Type=12;
+    this->Type=type_IU;
 
 this->ui->stackedWidget->setCurrentIndex(0);
    //   this->ui->CD_groupBox->setVisible(false);
 
-    if(this->Type==11)
+    if(this->Type==type_CD)
     {
         this->ui->label->setPixmap(QPixmap(":/icons/СД.png"));
         this->ui->stackedWidget->setCurrentWidget(this->ui->CD_groupBox);
        // this->ui->CD_groupBox->setVisible(true);
     }
 
-   if(this->Type==12)
+   if(this->Type==type_IU)
    {
         this->ui->stackedWidget->setCurrentWidget(this->ui->IU_groupBox);
         this->ui->label->setPixmap(QPixmap(":/icons/ИУ.png"));
@@ -597,7 +597,7 @@ qDebug()<<"Type: "<<type;
 
 bool MainWindow::change_item(MyItem *item)
 {
-    if(Type==11)
+    if(Type==type_CD)
     {
         item->Num2=Num2;
         item->DK=DK;
@@ -613,7 +613,7 @@ bool MainWindow::change_item(MyItem *item)
 
     }
 
-    if(Type==12)
+    if(Type==type_IU)
     {
         item->Num2=Num2;
         item->UdpUse=UdpUse;
@@ -627,11 +627,11 @@ bool MainWindow::change_item(MyItem *item)
 
 bool MainWindow::Get_data()
 {
-    if(Type==11)
+    if(Type==type_CD)
     {
      return this->Get_CD_data();
       }
-    if(Type==12)
+    if(Type==type_IU)
         return this->Get_IU_data();
 }
 

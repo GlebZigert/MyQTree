@@ -30,13 +30,13 @@ MyItem::MyItem(MyItem *mparent, QString name, int type)
     this->Name=name;
     this->Type=type;
 
-    if(this->Type==11)
+    if(this->Type==type_CD)
     {
         qDebug()<<"СД!!!!!!!!!!!!! !!!";
      this->viewPXM=QPixmap(":/icons/СД.png");
     }
 
-   if(this->Type==12)
+   if(this->Type==type_IU)
    {
     qDebug()<<"ИУ!!!!!!!!!!!!!!!!!!!";
    this->viewPXM=QPixmap(":/icons/ИУ.png");
@@ -131,7 +131,7 @@ void MyItem::show_children_1(QSettings *settings, bool root)
      settings->beginGroup(strGroup);
      settings->setValue("Name", this->Name);
      settings->setValue("Type",this->Type);
-     if(this->Type==11)
+     if(this->Type==type_CD)
      {
 
          settings->setValue("Num2",this->Num2);
@@ -148,7 +148,7 @@ void MyItem::show_children_1(QSettings *settings, bool root)
         // settings->setValue("UdpAdress",this->UdpAdress);
 
      }
-     if(this->Type==12)
+     if(this->Type==type_IU)
      {
 
          settings->setValue("Num2",this->Num2);
