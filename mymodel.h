@@ -44,12 +44,12 @@ public:
 
     QString path;
 
-
+  MyItem *rootItem;
 
 
 private:
 
-    MyItem *rootItem;
+
 
 signals:
     void dataChanged(const QModelIndex & topLeft, const QModelIndex & bottomRight);

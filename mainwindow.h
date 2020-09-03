@@ -9,6 +9,7 @@
 #include "mymodel.h"
 #include "myitem.h"
 #include "map.h"
+#include <QMap>
 
 
 namespace Ui {
@@ -33,6 +34,8 @@ public:
    QString path;
 
    Map map;
+
+   QMap<QModelIndex, int> itemmap;
 
 
 
@@ -84,6 +87,8 @@ private slots:
 
     void on_pushButton_5_clicked();
 
+    void on_pushButton_6_clicked();
+
 private:
 
     Ui::MainWindow *ui;
@@ -102,7 +107,11 @@ private:
 
       bool ok;
 
+      void append(QModelIndex,MyItem *item);
+
    bool  CD_look_on_input_data();
+
+   bool load_settings(QString ini_file);
 
 
 

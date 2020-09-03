@@ -6,6 +6,8 @@
 #include <QFileDialog>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include<QTextCodec>
+#include <QStack>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -380,7 +382,7 @@ res=this->Get_data();
 
 
 
-          model->append_item(model->index(current.row(),0,current.parent()),item);
+          append(model->index(current.row(),0,current.parent()),item);
 
              change_item( item);
 
@@ -472,7 +474,10 @@ void MainWindow::on_action_2_triggered()
     this->path=QFileDialog::getOpenFileName(this, "open file","","*.ini");
 
     qDebug()<<"ini file path: "<<path;
-    model->load_settings_1(path);
+
+
+  //  model->load_settings_1(path);
+    load_settings(path);
 
 }
 
@@ -806,3 +811,275 @@ void MainWindow::on_pushButton_5_clicked()
     else
         this->map.show();
 }
+
+void MainWindow::on_pushButton_6_clicked()
+{
+
+}
+
+void MainWindow::append(QModelIndex index, MyItem *item)
+{
+    model->append_item(index,item);
+
+}
+
+bool MainWindow::load_settings(QString ini_file)
+{
+    qDebug()<<"=============================== ";
+     qDebug()<<"= ";
+     qDebug()<<"= ";
+     qDebug()<<"=      load_settingd_1";
+     qDebug()<<"= ";
+     qDebug()<<"= ";
+     qDebug()<<"============================== ";
+    model->rootItem->m_child_list.clear();
+    MyItem *item = new MyItem(nullptr);
+    item->Name="System";
+    item->Type=800;
+    model->rootItem->m_child_list.append(item);
+
+    item->m_parent=model->rootItem;
+
+
+   // QSettings settings("/home/gleb/MyTree/rifx.ini",QSettings::IniFormat);
+    QSettings settings(ini_file,QSettings::IniFormat);
+
+     settings.setIniCodec(QTextCodec::codecForLocale() );
+    settings.beginGroup("TREE");
+    int count=settings.value("Count",-1).toInt();
+    qDebug()<<"device count: "<<count;
+    settings.endGroup();
+
+    if(0>=count)
+        return 0;
+
+
+
+
+
+
+    QModelIndex ind=model->index(0,0);
+    qDebug()<<"DATA..."<<model->data(ind,Qt::DisplayRole).toString();
+
+
+    /*
+    QStringList ls_childgroup=settings.childGroups();
+    for(int i=0;i<ls_childgroup.count();i++)
+        qDebug()<<ls_childgroup.at(i);
+    */
+
+
+
+    QList<MyItem> ls_item;
+
+    QStack<int> st_current;
+    int current=0;
+    QStack<int> st_vsego;
+    int vsego=count;
+    int child_cnt=0;
+    int cnt=0;
+    int deep=0;
+
+    for(int index=0;index<count;index++)
+    {
+        qDebug()<<("----------------");
+        QString strGroup("Obj_%1");
+
+        strGroup=strGroup.arg(index+1);
+        qDebug()<<strGroup;
+    //    qDebug()<<strGroup;
+    //    qDebug()<<"==================";
+        if(settings.childGroups().contains(strGroup))
+        {
+            settings.beginGroup(strGroup);
+
+
+
+
+            QString name=settings.value("Name", -1).toString();
+            int Type=settings.value("Type", -1).toInt();
+
+
+
+            MyItem *tmpItem = new MyItem(nullptr,name,Type);
+
+            child_cnt=0;
+            child_cnt=settings.value("Count", -1).toInt();
+
+            qDebug()<<"name   "<< tmpItem->Name  ;
+        //    qDebug()<<"type   "<< tmpItem->type  ;
+
+            if(Type==type_CD)
+            {
+                tmpItem->Num2=settings.value("Num2", -1).toInt();
+                tmpItem->DK=settings.value("DK", -1).toInt();
+                tmpItem->Bazalt=settings.value("Bazalt", -1).toInt();
+                tmpItem->ConnectBlock=settings.value("ConnectBlock", -1).toInt();
+                tmpItem->UdpUse=settings.value("UdpUse", -1).toInt();
+                if(tmpItem->UdpUse>0)
+                {
+                    tmpItem->UdpAdress=settings.value("UdpAdress", -1).toString();
+                    tmpItem->UdpPort=settings.value("UdpPort", -1).toInt();
+                }
+
+            }
+
+            if(Type==type_IU)
+            {
+                tmpItem->Num2=settings.value("Num2", -1).toInt();
+
+                tmpItem->UdpUse=settings.value("UdpUse", -1).toInt();
+                if(tmpItem->UdpUse>0)
+                {
+                    tmpItem->UdpAdress=settings.value("UdpAdress", -1).toString();
+                    tmpItem->UdpPort=settings.value("UdpPort", -1).toInt();
+                }
+
+            }
+            if(Type==type_TG)
+            {
+                tmpItem->Num1=settings.value("Num1", -1).toInt();
+                tmpItem->Num2=settings.value("Num2", -1).toInt();
+ tmpItem->DK=settings.value("DK", -1).toInt();
+                tmpItem->UdpUse=settings.value("UdpUse", -1).toInt();
+                if(tmpItem->UdpUse>0)
+                {
+                    tmpItem->UdpAdress=settings.value("UdpAdress", -1).toString();
+                    tmpItem->UdpPort=settings.value("UdpPort", -1).toInt();
+                }
+
+            }
+         //   qDebug()<<"cnt   "<< cnt  ;
+
+
+            if(!tmpItem->Name.isEmpty())
+            {
+
+                append(ind,tmpItem); //надо не добавлять по одиночке к руту
+                current++;
+            }
+
+            if(deep>0)
+            {
+                qDebug()<<"deep "<<deep;
+
+                qDebug()<<"is "<<current<<" from "<<vsego;
+
+            }
+
+            if(child_cnt>0)
+            {
+                //go to child
+                ind=model->index(model->rowCount(ind)-1,0,ind);
+
+                st_current.push(current);
+                current=0;
+
+
+                st_vsego.push(vsego);
+                vsego=child_cnt;
+
+                deep++;
+
+            }
+            else
+            {
+
+
+
+
+             int const_deep=deep;
+
+             for(int i=0;i<const_deep;i++)
+             {
+               if((current==vsego)&&(deep>0))
+               {
+                  qDebug()<<"The Last and no children";
+                   current=st_current.top();
+                   st_current.pop();
+                   vsego=st_vsego.top();
+                   st_vsego.pop();
+                   ind=model->parent(ind);
+                   deep--;
+
+               }
+
+
+             }
+
+
+
+
+            }
+
+
+/*
+
+            if(!tmpItem->name.isEmpty())
+            {
+
+                this->append_item(ind,tmpItem); //надо не добавлять по одиночке к руту
+
+
+                if(deep>0)
+                {
+                 int deep_const=deep;
+
+
+                for(int i=0;i<deep_const;i++)
+                {
+                    if(deep>0)
+                    {
+                  //  child_cnt--;
+
+
+                    if(0>child_cnt)
+                        {
+                            ind=this->parent(ind);
+                            child_cnt=st_cnt.top();
+                            st_cnt.pop();
+                            deep--;
+                            if(child_cnt>0)
+                            child_cnt--;
+                        }
+                    }
+
+                }
+                qDebug()<<"deep "<<deep;
+                }
+
+                                                //надо собрать дерево и записать указатель на дерево в переменную рута.
+            }
+            else
+                {
+                qDebug()<<"tmpItem->name.isEmpty()";
+                }
+
+            if (child_cnt>0)
+            {
+
+
+                qDebug()<<"!!! have a child: "<<cnt;
+
+
+                ind=this->index(this->rowCount(ind)-1,0,ind);
+                child_cnt=st_cnt.top();
+                deep++;
+            }
+
+
+
+
+
+
+
+                */
+            settings.endGroup();
+
+        }
+
+    }
+
+}
+
+
