@@ -290,10 +290,12 @@ if(type==type_TG)
             this->ui->TG_combobox_number->setCurrentText(QString::number(item->Num2));
             this->ui->TG_checkBox_DK->setChecked(item->DK);
             this->ui->TG_checkBox_UDP->setChecked(item->UdpUse);
+    if(item->UdpUse>0)
+    {
             this->ui->TG_lineEdit_ipaddr->setText(item->UdpAdress);
             this->ui->TG_lineEdit_ipport->setText(QString::number(item->UdpPort));
 
-
+    }
 }
 if(item->Name!="System")
 this->ui->name_item_to_append->setText(item->Name);

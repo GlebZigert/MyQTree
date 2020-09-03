@@ -162,6 +162,21 @@ void MyItem::show_children_1(QSettings *settings, bool root)
         // settings->setValue("UdpAdress",this->UdpAdress);
 
      }
+     if(this->Type==type_TG)
+     {
+    settings->setValue("Num1",this->Num1);
+         settings->setValue("Num2",this->Num2);
+         settings->setValue("DK",this->DK);
+         settings->setValue("UdpUse",this->UdpUse);
+         if(this->UdpUse>0)
+         {
+             settings->setValue("UdpAdress",this->UdpAdress);
+             settings->setValue("UdpPort",this->UdpPort);
+
+         }
+        // settings->setValue("UdpAdress",this->UdpAdress);
+
+     }
      }
     else
     {
