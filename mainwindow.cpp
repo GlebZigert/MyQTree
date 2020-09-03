@@ -798,3 +798,11 @@ void MainWindow::on_action_3_triggered()
 {
     model->save_settings(path);
 }
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    if(this->map.isVisible())
+        this->map.hide();
+    else
+        this->map.show();
+}

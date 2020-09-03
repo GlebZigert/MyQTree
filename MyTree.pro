@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     myitem.cpp \
     mymodel.cpp \
     newmodel.cpp \
-    settingutils.cpp
+    settingutils.cpp \
+    map.cpp
 
 HEADERS  += mainwindow.h \
     id.h \
@@ -33,9 +34,11 @@ HEADERS  += mainwindow.h \
     myitem.h \
     mymodel.h \
     newmodel.h \
-    settingutils.h
+    settingutils.h \
+    map.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    map.ui
 
 RESOURCES += \
     resource.qrc

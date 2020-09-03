@@ -8,6 +8,8 @@
 #include"mytreeview.h"
 #include "mymodel.h"
 #include "myitem.h"
+#include "map.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -29,6 +31,10 @@ public:
    bool val;
 
    QString path;
+
+   Map map;
+
+
 
 private slots:
 
@@ -75,6 +81,8 @@ private slots:
     bool Get_TG_data();
 
     void on_action_3_triggered();
+
+    void on_pushButton_5_clicked();
 
 private:
 
