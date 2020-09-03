@@ -1,35 +1,27 @@
 #ifndef MYDRAWOBJECT_H
 #define MYDRAWOBJECT_H
+#include <QGraphicsItem>
 
 #include <QObject>
-#include <QGraphicsItem>
-#include <QPainter>
+#include<QGraphicsSceneMouseEvent>
+#include<QCursor>
 
-class MyDrawObject : public QObject, public QGraphicsItem
+class MyDrawObject : public QGraphicsItem
 {
-    Q_OBJECT
 public:
-    explicit MyDrawObject(QObject *parent = 0);
-    ~MyDrawObject();
-
-signals:
-    /* Сигнал, который будет посылаться в том случае,
-     * если произошел клик мышью по объекту
-     * */
-    void signal1();
-
-protected:
-    /* Перегружаем метод нажатия мышью, для его перехвата
-     * */
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-
-private:
-    /* Данные методы виртуальные, поэтому их необходимо реализовать
-     * в случае наследования от QGraphicsItem
-     * */
+   MyDrawObject();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    float x1,y1,x2,y2;
 
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+
+private:
+    QImage image;
+    QVector<QImage> img_array;
 };
 
 #endif // MYDRAWOBJECT_H

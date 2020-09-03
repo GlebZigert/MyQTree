@@ -1,5 +1,8 @@
 #include "map.h"
 #include "ui_map.h"
+#include <QDebug>
+#include <QDrag>
+
 
 Map::Map(QWidget *parent) :
     QMainWindow(parent),
@@ -8,16 +11,22 @@ Map::Map(QWidget *parent) :
     ui->setupUi(this);
 
     cnt=0;
-    MyDrawObject *my=new MyDrawObject();
+
+
 
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
+
+    MyDrawObject *my=new MyDrawObject();
     scene->addItem(my);
+
 
     QBrush greenBrush(Qt::green);
     QBrush blueBrush(Qt::blue);
     QPen outlinePen(Qt::black);
     outlinePen.setWidth(2);
+
+
 
    // rectangle = scene->addRect(100, 0, 80, 100, outlinePen, blueBrush);
 
@@ -39,4 +48,19 @@ void Map::Add()
 Map::~Map()
 {
     delete ui;
+}
+
+void Map::mousePressEvent(QMouseEvent *event)
+{
+    qDebug()<<".";
+}
+
+void Map::mouseMoveEvent(QMouseEvent *event)
+{
+
+}
+
+void Map::mouseReleaseEvent(QMouseEvent *event)
+{
+
 }

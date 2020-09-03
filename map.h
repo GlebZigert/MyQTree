@@ -6,6 +6,7 @@
 #include <QMap>
 #include <QGraphicsItem>
 #include <mydrawobject.h>
+#include "mydrawobject.h"
 
 namespace Ui {
 class Map;
@@ -21,7 +22,9 @@ public:
     void Add();
     ~Map();
 
-
+   void mousePressEvent(QMouseEvent *event) override;
+   void mouseMoveEvent(QMouseEvent *event) override;
+   void mouseReleaseEvent(QMouseEvent *event) override;
 
 
 private:
