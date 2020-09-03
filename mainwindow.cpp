@@ -821,6 +821,7 @@ void MainWindow::append(QModelIndex index, MyItem *item)
 {
     model->append_item(index,item);
 
+
 }
 
 bool MainWindow::load_settings(QString ini_file)

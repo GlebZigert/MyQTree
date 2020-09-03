@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     mymodel.cpp \
     newmodel.cpp \
     settingutils.cpp \
-    map.cpp
+    map.cpp \
+    mydrawobject.cpp
 
 HEADERS  += mainwindow.h \
     id.h \
@@ -35,7 +36,8 @@ HEADERS  += mainwindow.h \
     mymodel.h \
     newmodel.h \
     settingutils.h \
-    map.h
+    map.h \
+    mydrawobject.h
 
 FORMS    += mainwindow.ui \
     map.ui

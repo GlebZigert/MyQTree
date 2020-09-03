@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <QMap>
+#include <QGraphicsItem>
+#include <mydrawobject.h>
 
 namespace Ui {
 class Map;
@@ -23,6 +26,9 @@ public:
 
 private:
     Ui::Map *ui;
+
+    int cnt;
+    QMap<QGraphicsItem*, int> map;
 
     QGraphicsScene *scene;
     QGraphicsEllipseItem *ellipse;
