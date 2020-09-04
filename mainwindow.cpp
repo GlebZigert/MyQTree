@@ -377,7 +377,7 @@ res=this->Get_data();
       qDebug()<<"res "<<res;
       if(1==res)
       {
-          MyItem *item=new MyItem(nullptr,name,type);
+          MyItem *item=new MyItem(nullptr,name,type,ID::getNextID_real());
 
 
 
@@ -819,6 +819,7 @@ void MainWindow::on_pushButton_6_clicked()
 
 void MainWindow::append(QModelIndex index, MyItem *item)
 {
+
     model->append_item(index,item);
 
 
@@ -902,7 +903,7 @@ bool MainWindow::load_settings(QString ini_file)
 
 
 
-            MyItem *tmpItem = new MyItem(nullptr,name,Type);
+            MyItem *tmpItem = new MyItem(nullptr,name,Type,ID::getNextID_real());
 
             child_cnt=0;
             child_cnt=settings.value("Count", -1).toInt();

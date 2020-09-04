@@ -25,8 +25,20 @@ MyItem::MyItem(MyItem *mparent)
    this->m_child_list.clear();
 }
 
-MyItem::MyItem(MyItem *mparent, QString name, int type)
+MyItem::MyItem(MyItem *mparent, QString name, int type, int id)
 {
+
+    this->ID=id;
+
+qDebug()<<"==================";
+qDebug()<<"=";
+qDebug()<<"=";
+qDebug()<<"=            "<<this->ID;
+qDebug()<<"=";
+qDebug()<<"=";
+
+    qDebug()<<"==================";
+
     this->Name=name;
     this->Type=type;
 

@@ -581,7 +581,7 @@ int MyModel::load_settings_1(QString ini_file)
 
 
 
-            MyItem *tmpItem = new MyItem(nullptr,name,Type);
+            MyItem *tmpItem = new MyItem(nullptr,name,Type,ID::getNextID_real());
 
             child_cnt=0;
             child_cnt=settings.value("Count", -1).toInt();

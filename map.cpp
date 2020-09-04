@@ -40,9 +40,9 @@ Map::Map(QWidget *parent) :
 
 }
 
-void Map::Add()
+void Map::Add(int id)
 {
-
+    qDebug()<<"id  "<<id;
 }
 
 Map::~Map()

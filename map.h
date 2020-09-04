@@ -19,7 +19,7 @@ class Map : public QMainWindow
 public:
         explicit Map(QWidget *parent = 0);
 
-    void Add();
+    void Add(int id);
     ~Map();
 
    void mousePressEvent(QMouseEvent *event) override;

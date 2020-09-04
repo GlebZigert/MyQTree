@@ -22,7 +22,7 @@ class MyItem
 
 public:
     MyItem(MyItem *mparent);
-     MyItem(MyItem *mparent,QString name, int Type);
+     MyItem(MyItem *mparent,QString name, int Type, int ID);
     ~MyItem();
 
 
@@ -46,7 +46,7 @@ void show_children_1(QSettings *settings,bool root);
 QPixmap viewPXM; //отображаемая иконка
  QPixmap getViewPxm();
 
- static int ID;
+int ID;
 
 public:
 
