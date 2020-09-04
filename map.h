@@ -31,7 +31,7 @@ private:
     Ui::Map *ui;
 
     int cnt;
-    QMap<QGraphicsItem*, int> map;
+    QMap< int,QGraphicsItem*> map;
 
     QGraphicsScene *scene;
     QGraphicsEllipseItem *ellipse;

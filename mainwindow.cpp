@@ -821,6 +821,7 @@ void MainWindow::append(QModelIndex index, MyItem *item)
 {
 
     model->append_item(index,item);
+    map.Add(item->ID);
 
 
 }

@@ -14,12 +14,17 @@ MyDrawObject::MyDrawObject()
 
 QRectF MyDrawObject::boundingRect() const
 {
+
+
+
 return QRectF(0,0,10,10);
 }
 
 void MyDrawObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setBrush(Qt::black);
+
+
     painter->drawEllipse(QRectF(0, 0, 10, 10));
 }
 

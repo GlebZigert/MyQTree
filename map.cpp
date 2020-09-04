@@ -43,6 +43,17 @@ Map::Map(QWidget *parent) :
 void Map::Add(int id)
 {
     qDebug()<<"id  "<<id;
+
+    MyDrawObject *object=new MyDrawObject();
+
+
+    scene->addItem(object);
+
+
+
+
+
+
 }
 
 Map::~Map()
