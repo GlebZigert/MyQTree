@@ -20,6 +20,8 @@ public:
         explicit Map(QWidget *parent = 0);
 
     void Add(int id);
+    void find(int id);
+    void remove(int id);
     ~Map();
 
    void mousePressEvent(QMouseEvent *event) override;
@@ -31,7 +33,7 @@ private:
     Ui::Map *ui;
 
     int cnt;
-    QMap< int,QGraphicsItem*> map;
+    QMap< int,MyDrawObject*> map;
 
     QGraphicsScene *scene;
     QGraphicsEllipseItem *ellipse;

@@ -9,7 +9,8 @@
 class MyDrawObject : public QGraphicsItem
 {
 public:
-   MyDrawObject();
+    int ID;
+   MyDrawObject(int ID);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     float x1,y1,x2,y2;

@@ -319,6 +319,8 @@ this->ui->CD_lineEdit_UpdPort->text()   =item->UdpPort;
 qDebug()<<name;
 qDebug()<<type;
 
+this->map.find(item->ID);
+
 
 
 
@@ -415,7 +417,18 @@ res=this->Get_data();
 void MainWindow::on_pushButton_2_clicked()
 {
     QModelIndex current=this->ui->treeView->currentIndex();
-    model->delete_item(model->index(current.row(),0,current.parent()));
+
+    MyItem *item = static_cast<MyItem*>(current.internalPointer());
+    this->map.remove(item->ID);
+
+     model->delete_item(model->index(current.row(),0,current.parent()));
+
+
+
+
+
+
+
 
 }
 

@@ -17,8 +17,8 @@ Map::Map(QWidget *parent) :
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
 
-    MyDrawObject *my=new MyDrawObject();
-    scene->addItem(my);
+   // MyDrawObject *my=new MyDrawObject();
+  //  scene->addItem(my);
 
 
     QBrush greenBrush(Qt::green);
@@ -44,14 +44,72 @@ void Map::Add(int id)
 {
     qDebug()<<"id  "<<id;
 
-    MyDrawObject *object=new MyDrawObject();
+    MyDrawObject *object=new MyDrawObject(id);
+
 
 
     scene->addItem(object);
 
 
 
+    foreach (QGraphicsItem* object, scene->items())
 
+    {
+    if(object->Type==MyDrawObject::Type)
+    {
+        qDebug()<<"object->Type==MyDrawObject.Type";
+
+    }
+
+
+
+    //  qDebug() << key << ":" ;
+
+    }
+
+
+
+
+
+
+
+
+}
+
+void Map::find(int id)
+{
+    foreach (int key, map.keys())
+
+    {
+
+    if(id==key)
+        qDebug() <<"Найден  "<< key ;
+
+    }
+
+}
+
+void Map::remove(int id)
+{
+    foreach (QGraphicsItem* object, scene->items())
+
+    {
+    if(object->Type==MyDrawObject::Type)
+    {
+        qDebug()<<"object->Type==MyDrawObject.Type";
+         if(qgraphicsitem_cast<MyDrawObject*>(object)->ID==id)
+            {
+            qDebug()<<"Удаляю";
+                      scene->removeItem(object);
+
+            }
+    }
+
+
+
+    //  qDebug() << key << ":" ;
+
+    }
 
 
 }
